@@ -1,0 +1,3 @@
+displayName = nice
+author = NotCJ
+version = 0.1

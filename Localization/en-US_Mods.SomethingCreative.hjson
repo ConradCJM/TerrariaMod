@@ -1,0 +1,12 @@
+Items: {
+
+	DirtBrick: {
+		DisplayName: Dirt Brick
+		Tooltip: "Crits Like a Brick, 10x Damage On Crit"
+	}
+
+	EnchantedBrick: {
+		DisplayName: Enchanted Brick
+		Tooltip: "Shoots Enchanted Bricks, Crits do 7x Damage"
+	}
+}
