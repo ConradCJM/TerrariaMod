@@ -1,12 +1,13 @@
 Items: {
-
 	DirtBrick: {
 		DisplayName: Dirt Brick
-		Tooltip: "Crits Like a Brick, 10x Damage On Crit"
+		Tooltip: Crits Like a Brick, Citical Hits do a bonus hit that does 10x Damage
 	}
 
 	EnchantedBrick: {
 		DisplayName: Enchanted Brick
-		Tooltip: "Shoots Enchanted Bricks, Crits do 7x Damage"
+		Tooltip: Shoots Enchanted Bricks, Citical Hits do a bonus hit that does 7x Damage
 	}
 }
+
+Projectiles.EnchantedBrickProjectile.DisplayName: Enchanted Brick Projectile

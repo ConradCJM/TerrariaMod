@@ -15,15 +15,16 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
-            Item.knockBack = 2;
+            Item.knockBack = 7;
 
             Item.useAnimation = 20;
             Item.useTime = 20;
 
-            Item.scale = 1.5f;
+            Item.scale = 1.25f;
             Item.crit = -5;
             Item.rare = ItemRarityID.Green;
             Item.value = 0;
+            Item.useTurn = true;
 
         }
 
