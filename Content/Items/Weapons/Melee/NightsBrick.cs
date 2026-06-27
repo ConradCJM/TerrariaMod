@@ -28,7 +28,6 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.crit = -15;
             Item.rare = ItemRarityID.Purple;
             Item.value = 67;
-            Item.useTurn = true;
             Item.shootSpeed = 30f;
             Item.shoot = ModContent.ProjectileType<NightsBrickProjectile>();
 

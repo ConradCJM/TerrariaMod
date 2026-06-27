@@ -11,11 +11,17 @@ Items: {
 
 	NightsBrick: {
 		DisplayName: Nights Brick
-		Tooltip: Shoots a shadow brick that does 5x bonus damage on a crit, Melee Crits do a bonus 9x damage
+		Tooltip: Shoots a shadow brick that does 5x bonus damage on a crit, Melee Crits do a bonus hit that does 9x damage
+	}
+
+	TerraBrick: {
+		DisplayName: Terra Brick
+		Tooltip: Shoots Terra Bricks that do 4x bonus damage on a crit, Melee Crits do a bonus hit that does 10x damage
 	}
 }
 
 Projectiles: {
 	EnchantedBrickProjectile.DisplayName: Enchanted Brick Projectile
 	NightsBrickProjectile.DisplayName: Nights Brick Projectile
+	TerraBrickProjectile.DisplayName: Terra Brick Projectile
 }
