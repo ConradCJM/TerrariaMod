@@ -4,11 +4,14 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using SomethingCreative.Content.Projectiles;
+using Terraria.Audio;
 
 namespace SomethingCreative.Content.Items.Weapons.Melee
 {
     public class EnchantedBrick : ModItem
     {
+        
+        
         public override void SetDefaults()
         {
             Item.Size = new Vector2(32, 32);
@@ -48,11 +51,18 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source,
             Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            var modPlayer = player.GetModPlayer<BrickModPlayer>();
+            if (modPlayer.projectileCooldown > 0)
+            {
+                return false;
+            }
             Vector2 direction = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
             velocity = direction * Item.shootSpeed;
 
             Projectile.NewProjectile(source, player.Center, velocity, type, damage, knockback, player.whoAmI);
+            SoundEngine.PlaySound(SoundID.MaxMana, player.Center);
 
+            modPlayer.projectileCooldown = 60;
             return false; 
         }
 
@@ -71,6 +81,32 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             {
                 int extraDamage = damageDone * 7;
                 target.SimpleStrikeNPC(extraDamage, 0, false, 0, DamageClass.Melee, false, 0, false);
+
+                SoundEngine.PlaySound(SoundID.AbigailAttack, target.Center);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust d2 = Dust.NewDustPerfect(
+                        target.Center,
+                        DustID.MagicMirror,
+                        Main.rand.NextVector2Circular(10f, 10f),
+                        150,
+                        default,
+                        1.4f
+                    );
+                    d2.noGravity = true;
+                }
+            }
+        }
+    }
+    public class BrickModPlayer : ModPlayer
+    {
+        public int projectileCooldown = 0;
+        public override void ResetEffects()
+        {
+            if (projectileCooldown > 0)
+            {
+                projectileCooldown--;
             }
         }
     }

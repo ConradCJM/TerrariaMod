@@ -1,7 +1,8 @@
-﻿using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.ID;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace SomethingCreative.Content.Items.Weapons.Melee
 {
@@ -21,7 +22,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.useTime = 20;
 
             Item.scale = 1.25f;
-            Item.crit = -5;
+            Item.crit = -10;
             Item.rare = ItemRarityID.Green;
             Item.value = 0;
             Item.useTurn = true;
@@ -41,6 +42,19 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
                 
                 int extraDamage = damageDone * 10;
                 target.SimpleStrikeNPC(extraDamage,0,false,0,DamageClass.Melee,false,0,false);
+                SoundEngine.PlaySound(SoundID.Dig, target.Center);
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust d2 = Dust.NewDustPerfect(
+                        target.Center,
+                        DustID.Dirt,
+                        Main.rand.NextVector2Circular(10f, 10f),
+                        150,
+                        default,
+                        1.4f
+                    );
+                    d2.noGravity = true;
+                }
             }
         }
 

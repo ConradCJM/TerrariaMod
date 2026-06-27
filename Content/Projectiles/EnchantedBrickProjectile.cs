@@ -1,7 +1,9 @@
 ﻿using Microsoft.Build.Framework.Profiler;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,41 +24,99 @@ namespace SomethingCreative.Content.Projectiles
 
             Projectile.penetrate = 1;
             Projectile.timeLeft = 90;
-            Projectile.Opacity = 0.25f;
+            Projectile.alpha = 0;
+
 
             Projectile.DamageType = DamageClass.Melee;
         }
 
         public override void AI()
         {
+            //Main.NewText("Alpha: " + Projectile.alpha);
+
             Projectile.ai[0]++;
 
             Projectile.velocity *= 0.98f;
             Projectile.rotation += 0.5f;
             Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 1f);
+
+            if (Projectile.ai[0] < 30)
+            {
+                Dust d = Dust.NewDustPerfect(
+                Projectile.Center,
+                DustID.MagicMirror,
+                Projectile.velocity * -0.2f,
+                150,
+                default,
+                1.2f
+
+             );
+                d.noGravity = true;
+            }
+
+            if (Projectile.ai[0] > 30)
+            {
+                Projectile.alpha += 255/60;
+                if (Projectile.alpha > 255)
+                    Projectile.alpha = 255;
+            }
+
+
+
+
+
+
+
+
+            if (Projectile.ai[0] == 30)
+            {
+                Projectile.velocity = Vector2.Zero;
+                Projectile.penetrate = 3;
+
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust d2 = Dust.NewDustPerfect(
+                        Projectile.Center,
+                        DustID.MagicMirror,
+                        Main.rand.NextVector2Circular(10f, 10f),
+                        150,
+                        default,
+                        1.4f
+                    );
+                    d2.noGravity = true;
+                }
+
+                SoundEngine.PlaySound(SoundID.Item10, Projectile.Center);
+            }
+
         }
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
 
-            //center of the sprite
             Vector2 origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
-            //draw the projectile manually
+            
+            float alphaMult = (255 - Projectile.alpha) / 255f;
+
+           
+            Color drawColor = lightColor * alphaMult;
+
             Main.EntitySpriteDraw(
                 texture,
                 Projectile.Center - Main.screenPosition,
                 null,
-                lightColor,
+                drawColor,              
                 Projectile.rotation,
-                origin,                //recenters the sprite
+                origin,
                 Projectile.scale,
                 SpriteEffects.None,
                 0
             );
 
-            return false; 
+            return false;
         }
+
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -64,6 +124,20 @@ namespace SomethingCreative.Content.Projectiles
             {
                 int extraDamage = damageDone * 7;
                 target.SimpleStrikeNPC(extraDamage, 0, false, 0, DamageClass.Melee, false, 0, false);
+
+                SoundEngine.PlaySound(SoundID.AbigailAttack, target.Center);
+                for (int i = 0; i < 20; i++)
+                {
+                    Dust d2 = Dust.NewDustPerfect(
+                        target.Center,
+                        DustID.MagicMirror,
+                        Main.rand.NextVector2Circular(10f, 10f),
+                        150,
+                        default,
+                        1.4f
+                    );
+                    d2.noGravity = true;
+                }
             }
         }
 
