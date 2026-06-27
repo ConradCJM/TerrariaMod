@@ -8,6 +8,14 @@ Items: {
 		DisplayName: Enchanted Brick
 		Tooltip: Shoots Enchanted Bricks, Citical Hits do a bonus hit that does 7x Damage
 	}
+
+	NightsBrick: {
+		DisplayName: Nights Brick
+		Tooltip: Shoots a shadow brick that does 5x bonus damage on a crit, Melee Crits do a bonus 9x damage
+	}
 }
 
-Projectiles.EnchantedBrickProjectile.DisplayName: Enchanted Brick Projectile
+Projectiles: {
+	EnchantedBrickProjectile.DisplayName: Enchanted Brick Projectile
+	NightsBrickProjectile.DisplayName: Nights Brick Projectile
+}
