@@ -18,6 +18,11 @@ Items: {
 		DisplayName: Terra Brick
 		Tooltip: Shoots Terra Bricks that do 4x bonus damage on a crit, Melee Crits do a bonus hit that does 10x damage
 	}
+
+	BricksWrath: {
+		DisplayName: Bricks Wrath
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
