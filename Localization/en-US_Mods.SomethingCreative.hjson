@@ -21,12 +21,12 @@ Items: {
 
 	BricksWrath: {
 		DisplayName: Bricks Wrath
-		Tooltip: I'm Bricked (Look) Up! 
+		Tooltip: I'm Bricked (Look) Up!
 	}
 
 	LegoBrick: {
 		DisplayName: Lego Brick
-		Tooltip: "Is that a brick in your pocket or are you just happy to see me?"
+		Tooltip: Is that a brick in your pocket or are you just happy to see me?
 	}
 }
 
@@ -37,4 +37,8 @@ Projectiles: {
 	BigStarBrick.DisplayName: Big Star Brick
 	StarBrick.DisplayName: Star Brick
 	BigStarBrickExplosion.DisplayName: Big Star Brick Explosion
+	BigLegoExplosion.DisplayName: Big Lego Explosion
+	BigLegoProjectile.DisplayName: Big Lego Projectile
+	LegoProjectile.DisplayName: Lego Projectile
+	LegoExplosion.DisplayName: Lego Explosion
 }
