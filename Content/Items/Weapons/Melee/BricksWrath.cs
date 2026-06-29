@@ -27,7 +27,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             Item.scale = 4f;
             Item.crit = -28;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ItemRarityID.Master;
             Item.value = 67;
             Item.shootSpeed = 30f;
             Item.shoot = ModContent.ProjectileType<StarBrick>(); //star brick
@@ -124,7 +124,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
                 int extraDamage = damageDone * 10;
                 target.SimpleStrikeNPC(extraDamage, 0, false, 0, DamageClass.Melee, false, 0, false);
-                SoundEngine.PlaySound(SoundID.Dig, target.Center);
+                SoundEngine.PlaySound(SoundID.AbigailAttack, target.Center);
                 for (int i = 0; i < 20; i++)
                 {
                     Dust d = Dust.NewDustPerfect(
