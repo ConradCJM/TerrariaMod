@@ -21,7 +21,7 @@ Items: {
 
 	BricksWrath: {
 		DisplayName: Bricks Wrath
-		Tooltip: ""
+		Tooltip: I'm Bricked, Look Up. 
 	}
 }
 
@@ -29,4 +29,7 @@ Projectiles: {
 	EnchantedBrickProjectile.DisplayName: Enchanted Brick Projectile
 	NightsBrickProjectile.DisplayName: Nights Brick Projectile
 	TerraBrickProjectile.DisplayName: Terra Brick Projectile
+	BigStarBrick.DisplayName: Big Star Brick
+	StarBrick.DisplayName: Star Brick
+	BigStarBrickExplosion.DisplayName: Big Star Brick Explosion
 }

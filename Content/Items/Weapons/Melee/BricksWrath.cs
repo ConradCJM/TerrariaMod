@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using SomethingCreative.Content.Projectiles;
 using System.Security.Cryptography.Xml;
+using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -21,15 +22,15 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.knockBack = 20;
 
-            Item.useAnimation = 25;
-            Item.useTime = 25;
+            Item.useAnimation = 23;
+            Item.useTime = 23;
 
             Item.scale = 4f;
             Item.crit = -28;
             Item.rare = ItemRarityID.Purple;
             Item.value = 67;
-            Item.shootSpeed = 50f;
-            Item.shoot = ModContent.ProjectileType<TerraBrickProjectile>(); //star brick
+            Item.shootSpeed = 30f;
+            Item.shoot = ModContent.ProjectileType<StarBrick>(); //star brick
 
         }
 
@@ -53,9 +54,9 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
         {
             var modPlayer = player.GetModPlayer<BricksWrathPlayer>();
             
-            float randomX = Main.rand.NextFloat(0f, 500f);
-            
-            Vector2 spawnLocation = player.Center + new Vector2(randomX, -1500f);
+            float randomX = Main.rand.NextFloat(-200f, 200f);
+
+            Vector2 spawnLocation = player.Center + new Vector2(randomX, -600f);
 
             Vector2 direction = (Main.MouseWorld - spawnLocation).SafeNormalize(Vector2.UnitX);
 
@@ -63,6 +64,30 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             Projectile.NewProjectile(source, spawnLocation, velocity, type, damage, knockback, player.whoAmI); // star brick
             SoundEngine.PlaySound(SoundID.DD2_BetsysWrathShot, player.Center);
+            
+            
+            
+            randomX = Main.rand.NextFloat(-200f, 200f);
+
+            spawnLocation = player.Center + new Vector2(randomX, -800f);
+
+            direction = (Main.MouseWorld - spawnLocation).SafeNormalize(Vector2.UnitX);
+
+            velocity = direction * Item.shootSpeed;
+
+            Projectile.NewProjectile(source, spawnLocation, velocity, type, damage, knockback, player.whoAmI); // star brick
+
+
+
+            randomX = Main.rand.NextFloat(-200f, 200f);
+
+            spawnLocation = player.Center + new Vector2(randomX, -700f);
+
+            direction = (Main.MouseWorld - spawnLocation).SafeNormalize(Vector2.UnitX);
+
+            velocity = direction * Item.shootSpeed;
+
+            Projectile.NewProjectile(source, spawnLocation, velocity, type, damage, knockback, player.whoAmI); // star brick
 
 
 
@@ -70,10 +95,18 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             if (modPlayer.projectileCooldown <= 0)
             {
-                int secondType = ModContent.ProjectileType<NightsBrickProjectile>();
-                Vector2 secondaryVelocity = velocity * 0.5f;
-                Projectile.NewProjectile(source, spawnLocation, secondaryVelocity, secondType, damage, knockback, player.whoAmI); // big star brick
-                modPlayer.projectileCooldown = 60;
+                int secondType = ModContent.ProjectileType<BigStarBrick>();
+
+
+                randomX = Main.rand.NextFloat(-200f, 200f);
+                spawnLocation = player.Center + new Vector2(randomX, -1000f);
+
+                direction = (Main.MouseWorld - spawnLocation).SafeNormalize(Vector2.UnitX);
+
+                Vector2 secondaryVelocity = direction * Item.shootSpeed * 0.3f;
+
+                Projectile.NewProjectile(source, spawnLocation, secondaryVelocity, secondType, damage*5, knockback, player.whoAmI); // big star brick
+                modPlayer.projectileCooldown = 460;
             }
 
 
@@ -96,7 +129,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
                 {
                     Dust d = Dust.NewDustPerfect(
                         target.Center,
-                        DustID.Terra,
+                        DustID.TeleportationPotion,
                         Main.rand.NextVector2Circular(10f, 10f),
                         150,
                         default,
@@ -104,12 +137,22 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
                     );
                     Dust d2 = Dust.NewDustPerfect(
                         target.Center,
-                        DustID.TerraBlade,
+                        DustID.HeatRay,
                         Main.rand.NextVector2Circular(10f, 10f),
                         150,
                         default,
                         1.4f
                     );
+                    Dust d3 = Dust.NewDustPerfect(
+                        target.Center,
+                        DustID.Demonite,
+                        Main.rand.NextVector2Circular(10f, 10f),
+                        150,
+                        default,
+                        1.4f
+
+                 );
+                    d3.noGravity = true;
                     d2.noGravity = true;
                     d.noGravity = true;
                 }

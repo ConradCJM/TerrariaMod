@@ -101,7 +101,7 @@ namespace SomethingCreative.Content.Projectiles
                 for (int i = 0; i < 20; i++)
                 {
                     Dust d = Dust.NewDustPerfect(
-                    Projectile.Center,
+                    target.Center,
                     DustID.Terra,
                     Main.rand.NextVector2Circular(10f, 10f),
                     150,
@@ -110,7 +110,7 @@ namespace SomethingCreative.Content.Projectiles
 
                  );
                     Dust d2 = Dust.NewDustPerfect(
-                     Projectile.Center,
+                     target.Center,
                      DustID.TerraBlade,
                      Main.rand.NextVector2Circular(10f, 10f),
                      150,
