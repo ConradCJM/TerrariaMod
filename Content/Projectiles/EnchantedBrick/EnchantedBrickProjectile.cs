@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace SomethingCreative.Content.Projectiles
+namespace SomethingCreative.Content.Projectiles.EnchantedBrick
 {
     public class EnchantedBrickProjectile : ModProjectile
     {

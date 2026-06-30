@@ -43,7 +43,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             }
             Item.value = 670000*5;
             Item.shootSpeed = 25f;
-            Item.shoot = ModContent.ProjectileType<Projectiles.LegoProjectile>();
+            Item.shoot = ModContent.ProjectileType<SomethingCreative.Content.Projectiles.LegoBrick.LegoProjectile>();
 
         }
 
@@ -168,7 +168,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             int projectileDamage = Item.damage * 5;
 
-            ModProjectile modProjectile = ModContent.GetModProjectile(ModContent.ProjectileType<Projectiles.BigLegoProjectile>());
+            ModProjectile modProjectile = ModContent.GetModProjectile(ModContent.ProjectileType<SomethingCreative.Content.Projectiles.LegoBrick.BigLegoProjectile>());
 
             Projectile.NewProjectile(
                     source,

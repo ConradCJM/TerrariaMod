@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using SomethingCreative.Content.Projectiles;
+using SomethingCreative.Content.Projectiles.NightsBrick;
 using System.Security.Cryptography.Xml;
 using Terraria;
 using Terraria.Audio;

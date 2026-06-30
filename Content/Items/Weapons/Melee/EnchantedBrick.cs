@@ -3,8 +3,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using SomethingCreative.Content.Projectiles;
 using Terraria.Audio;
+using SomethingCreative.Content.Projectiles.EnchantedBrick;
 
 namespace SomethingCreative.Content.Items.Weapons.Melee
 {

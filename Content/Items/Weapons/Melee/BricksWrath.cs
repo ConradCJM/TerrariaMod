@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using SomethingCreative.Content.Projectiles;
+using SomethingCreative.Content.Projectiles.BricksWrath;
 using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using Terraria;

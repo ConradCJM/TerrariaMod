@@ -10,7 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace SomethingCreative.Content.Projectiles
+namespace SomethingCreative.Content.Projectiles.BricksWrath
 {
     public class BigStarBrickExplosion : ModProjectile
     {

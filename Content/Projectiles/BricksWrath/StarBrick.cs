@@ -7,24 +7,24 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace SomethingCreative.Content.Projectiles
+namespace SomethingCreative.Content.Projectiles.BricksWrath
 {
-    public class NightsBrickProjectile : ModProjectile
+    public class StarBrick : ModProjectile
     {
         public override void SetDefaults()
         {
-            Projectile.width = 30;
-            Projectile.height = 30;
+            Projectile.width = 32;
+            Projectile.height = 32;
 
-            Projectile.scale = 4f;
+            Projectile.scale = 1.25f;
 
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.tileCollide = false;
 
-            Projectile.penetrate = 100;
-            Projectile.timeLeft = 30;
-            Projectile.alpha = 175;
+            Projectile.penetrate = 5;
+            Projectile.timeLeft = 120;
+            Projectile.alpha = 0;
 
 
             Projectile.DamageType = DamageClass.Melee;
@@ -37,27 +37,37 @@ namespace SomethingCreative.Content.Projectiles
 
             Projectile.ai[0]++;
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Projectile.velocity *= 0.97f;
+            Projectile.velocity *= 0.985f;
             Lighting.AddLight(Projectile.Center, 0.3f, 0.3f, 1f);
 
             Dust d = Dust.NewDustPerfect(
              Projectile.Center,
-             DustID.Wraith,
-             Main.rand.NextVector2Circular(10f, 10f),
+             DustID.TeleportationPotion,
+             Main.rand.NextVector2Circular(15f, 15f),
              150,
              default,
-             1.4f
+             0.9f
 
           );
             Dust d2 = Dust.NewDustPerfect(
              Projectile.Center,
-             DustID.GemAmethyst,
-             Main.rand.NextVector2Circular(10f, 10f),
+             DustID.HeatRay,
+             Main.rand.NextVector2Circular(15f, 15f),
              150,
              default,
-             1.4f
+             0.9f
 
           );
+            Dust d3 = Dust.NewDustPerfect(
+                        Projectile.Center,
+                        DustID.Demonite,
+                        Main.rand.NextVector2Circular(15f, 15f),
+                        150,
+                        default,
+                        0.9f
+
+                 );
+            d3.noGravity = true;
             d.noGravity = true;
             d2.noGravity = true;
 
@@ -94,7 +104,7 @@ namespace SomethingCreative.Content.Projectiles
         {
             if (hit.Crit)
             {
-                int extraDamage = damageDone * 5;
+                int extraDamage = damageDone * 3;
                 target.SimpleStrikeNPC(extraDamage, 0, false, 0, DamageClass.Melee, false, 0, false);
 
                 SoundEngine.PlaySound(SoundID.AbigailAttack, target.Center);
@@ -102,7 +112,7 @@ namespace SomethingCreative.Content.Projectiles
                 {
                     Dust d = Dust.NewDustPerfect(
                     target.Center,
-                    DustID.Wraith,
+                    DustID.TeleportationPotion,
                     Main.rand.NextVector2Circular(10f, 10f),
                     150,
                     default,
@@ -111,13 +121,23 @@ namespace SomethingCreative.Content.Projectiles
                  );
                     Dust d2 = Dust.NewDustPerfect(
                      target.Center,
-                     DustID.GemAmethyst,
+                     DustID.HeatRay,
                      Main.rand.NextVector2Circular(10f, 10f),
                      150,
                      default,
                      1.4f
 
                  );
+                    Dust d3 = Dust.NewDustPerfect(
+                        target.Center,
+                        DustID.Demonite,
+                        Main.rand.NextVector2Circular(10f, 10f),
+                        150,
+                        default,
+                        1.4f
+
+                 );
+                    d3.noGravity = true;
                     d.noGravity = true;
                     d2.noGravity = true;
                 }
