@@ -25,7 +25,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
         public override void AI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation += 0.4f;
 
             Dust d = Dust.NewDustPerfect(
                             Projectile.Center,
