@@ -25,6 +25,11 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
 
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
             Item.shootSpeed = 12f;
+
+            Item.crit = 1;
+
+            Item.DamageType = DamageClass.Ranged;
+
         }
 
         public override void AddRecipes()
