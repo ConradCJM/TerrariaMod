@@ -82,7 +82,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                 Projectile.Center,
                 Vector2.Zero,
                 ModContent.ProjectileType<PumpkinProjectileExplosion>(),
-                Projectile.damage,
+                Projectile.damage/2,
                 Projectile.knockBack,
                 Projectile.owner
             );
