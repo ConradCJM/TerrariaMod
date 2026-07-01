@@ -24,8 +24,6 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2f;
             Item.ammo = ModContent.ItemType<PumpkinAmmo>();
-
-            Item.shootSpeed = 15f;
             Item.shoot = ModContent.ProjectileType<DirtPumpkinProjectile>();
 
         }
