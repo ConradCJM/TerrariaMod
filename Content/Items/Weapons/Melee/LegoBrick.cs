@@ -5,6 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System;
+using SomethingCreative.Content.Projectiles.LegoBrick;
 
 namespace SomethingCreative.Content.Items.Weapons.Melee
 {
@@ -43,7 +44,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             }
             Item.value = 670000*5;
             Item.shootSpeed = 25f;
-            Item.shoot = ModContent.ProjectileType<SomethingCreative.Content.Projectiles.LegoBrick.LegoProjectile>();
+            Item.shoot = ModContent.ProjectileType<LegoProjectile>();
 
         }
 
@@ -168,7 +169,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             int projectileDamage = Item.damage * 5;
 
-            ModProjectile modProjectile = ModContent.GetModProjectile(ModContent.ProjectileType<SomethingCreative.Content.Projectiles.LegoBrick.BigLegoProjectile>());
+            ModProjectile modProjectile = ModContent.GetModProjectile(ModContent.ProjectileType<BigLegoProjectile>());
 
             Projectile.NewProjectile(
                     source,

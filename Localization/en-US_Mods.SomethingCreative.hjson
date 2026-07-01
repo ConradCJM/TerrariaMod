@@ -28,6 +28,21 @@ Items: {
 		DisplayName: Lego Brick
 		Tooltip: Is that a brick in your pocket or are you just happy to see me?
 	}
+
+	DirtPumpkinAmmo: {
+		DisplayName: Dirt Pumpkin Ammo
+		Tooltip: A Dirty Pumpkin
+	}
+
+	PumpkinAmmo: {
+		DisplayName: Pumpkin Ammo
+		Tooltip: Explodes for somereason
+	}
+
+	PumpkinLauncher: {
+		DisplayName: Pumpkin Launcher
+		Tooltip: Shoot Pumpkins
+	}
 }
 
 Projectiles: {
@@ -41,4 +56,6 @@ Projectiles: {
 	BigLegoProjectile.DisplayName: Big Lego Projectile
 	LegoProjectile.DisplayName: Lego Projectile
 	LegoExplosion.DisplayName: Lego Explosion
+	PumpkinProjectile.DisplayName: Pumpkin Projectile
+	DirtPumpkinProjectile.DisplayName: Dirt Pumpkin Projectile
 }

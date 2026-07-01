@@ -14,7 +14,7 @@
 	  <Folder Include="Content\Dusts\" />
 	  <Folder Include="Content\Items\Accessories\" />
 	  <Folder Include="Content\Items\Weapons\Magic\" />
-	  <Folder Include="Content\Items\Weapons\Ranged\" />
+	  <Folder Include="Content\Classes\" />
 	  <Folder Include="Content\NPCS\" />
 	  <Folder Include="Core\" />
 	</ItemGroup>
