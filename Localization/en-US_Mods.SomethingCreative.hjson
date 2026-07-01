@@ -36,7 +36,7 @@ Items: {
 
 	PumpkinAmmo: {
 		DisplayName: Pumpkin Ammo
-		Tooltip: Explodes for somereason
+		Tooltip: Explodes into spores
 	}
 
 	PumpkinLauncher: {
@@ -58,4 +58,5 @@ Projectiles: {
 	LegoExplosion.DisplayName: Lego Explosion
 	PumpkinProjectile.DisplayName: Pumpkin Projectile
 	DirtPumpkinProjectile.DisplayName: Dirt Pumpkin Projectile
+	PumpkinProjectileExplosion.DisplayName: Pumpkin Projectile Explosion
 }
