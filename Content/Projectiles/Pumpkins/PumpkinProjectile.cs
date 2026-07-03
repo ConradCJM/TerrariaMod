@@ -12,7 +12,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
         {
             Projectile.width = 54;
             Projectile.height = 52;
-            Projectile.scale = 0.6f;
+            Projectile.scale = 0.5f;
             
             Projectile.friendly = true; 
             Projectile.DamageType = DamageClass.Ranged; 
@@ -120,7 +120,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                     DustID.JungleSpore,
                     Main.rand.NextVector2Circular(20f, 20f),
                     150,
-                    new Color(255, 32, 0, 1),
+                    new Color(255, 0, 0, 1),
                     6f
                 );
                 d.noGravity = true;

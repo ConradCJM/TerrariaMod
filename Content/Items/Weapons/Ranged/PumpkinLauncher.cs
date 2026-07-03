@@ -24,11 +24,12 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.noMelee = true;
 
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
-            Item.shootSpeed = 12f;
+            Item.shootSpeed = 17f;
 
             Item.crit = 1;
 
             Item.DamageType = DamageClass.Ranged;
+            Item.UseSound = SoundID.Item108 with { PitchVariance = 0.1f, Pitch = -0.8f };
 
         }
 

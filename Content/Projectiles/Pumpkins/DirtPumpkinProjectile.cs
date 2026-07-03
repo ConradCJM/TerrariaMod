@@ -12,7 +12,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
         {
             Projectile.width = 54;
             Projectile.height = 52;
-            Projectile.scale = 0.6f;
+            Projectile.scale = 0.5f;
 
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;

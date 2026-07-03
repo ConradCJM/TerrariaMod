@@ -31,7 +31,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
         public override void AddRecipes()
         {
             Recipe r = CreateRecipe(5);
-            r.AddIngredient(ItemID.Pumpkin, 1);
+            r.AddIngredient(ItemID.Pumpkin, 5);
             r.AddTile(TileID.WorkBenches);
             r.Register();
         }
