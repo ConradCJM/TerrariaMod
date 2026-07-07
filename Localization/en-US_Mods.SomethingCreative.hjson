@@ -43,6 +43,11 @@ Items: {
 		DisplayName: Pumpkin Launcher
 		Tooltip: Shoot Pumpkins
 	}
+
+	FlamingPumpkinAmmo: {
+		DisplayName: Flaming Pumpkin Ammo
+		Tooltip: Pierces as long as it continues hitting enemies. Explodes into many flaming spores.
+	}
 }
 
 Projectiles: {
@@ -59,4 +64,6 @@ Projectiles: {
 	PumpkinProjectile.DisplayName: Pumpkin Projectile
 	DirtPumpkinProjectile.DisplayName: Dirt Pumpkin Projectile
 	PumpkinProjectileExplosion.DisplayName: Pumpkin Projectile Explosion
+	FlamingPumpkinProjectile.DisplayName: Flaming Pumpkin Projectile
+	FlamingPumpkinExplosion.DisplayName: Flaming Pumpkin Explosion
 }
