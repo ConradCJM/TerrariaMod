@@ -72,6 +72,8 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
         {
             Projectile.timeLeft = 5; // infinite pierce until it doesnt hit an npc for 5 ticks
 
+            target.AddBuff(BuffID.OnFire, 150); 
+
         }
 
         public override void OnKill(int timeLeft)
@@ -95,9 +97,10 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             for (int i = 0; i < randomAmount; i++)
             {
                 Vector2 randomVelocity = Main.rand.NextVector2Circular(25f, 25f);
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, randomVelocity, ModContent.ProjectileType<FlamingPumpkinExplosion>(),(int) (Projectile.damage / 3.2), 0f, Projectile.owner);
+                int randDiv = Main.rand.Next<int>([2, 3, 4]);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, randomVelocity, ModContent.ProjectileType<FlamingPumpkinExplosion>(),(int) (Projectile.damage / randDiv), 0f, Projectile.owner);
             }
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FlamingPumpkinExplosion>(), (int)(Projectile.damage / 1.5), 0f, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FlamingPumpkinExplosion>(), (int)(Projectile.damage / 3), 0f, Projectile.owner);
         }
 
     }
@@ -111,13 +114,18 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = -1;
-            Projectile.timeLeft = 30;
+            Projectile.timeLeft = 60;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 9;
+            Projectile.localNPCHitCooldown = 25;
 
             Projectile.tileCollide = false;
 
             Projectile.hide = true;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.OnFire, 150);
         }
 
         public override void AI()
@@ -130,7 +138,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                             Main.rand.NextVector2Circular(1f, 1f),
                             150,
                             default,
-                            2f
+                            3f
                         );
             d3.noGravity = true;
             for (int i = 0; i < 4; i++)
