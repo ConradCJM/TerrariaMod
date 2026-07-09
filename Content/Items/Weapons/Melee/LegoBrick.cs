@@ -65,7 +65,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
                 }
                 else
                 {
-                    r.AddIngredient(ItemID.Cactus);
+                    r.AddIngredient(ItemID.Cactus);//for testing and now as a joke item in the recipe if some weird reason the calamity mod is installed but the recipe is not found. this should never happen but just in case
                 }
             }
             else

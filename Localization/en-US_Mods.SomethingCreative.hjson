@@ -106,6 +106,14 @@ Items: {
 			Spawns 4-8 homing spores when hitting an enemy.
 			'''
 	}
+
+	VoidPumpkinAmmo: {
+		DisplayName: Void Pumpkin Ammo
+		Tooltip: 
+		'''
+			
+		'''
+	}
 }
 
 Projectiles: {
@@ -128,4 +136,8 @@ Projectiles: {
 	CrystalSpore.DisplayName: Crystal Spore
 	ChlorophytePumpkinProjectile.DisplayName: Chlorophyte Pumpkin Projectile
 	ChloroSpawn.DisplayName: Chloro Spawn
+	VoidPumpkinProjectile.DisplayName: Void Pumpkin Projectile
+	VoidPumpkinBlackhole.DisplayName: Void Pumpkin Blackhole
+	VoidSpore.DisplayName: Void Spore
+	VoidPumpkinBlackholeExplosion.DisplayName: Void Pumpkin Blackhole Explosion
 }
