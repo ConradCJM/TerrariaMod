@@ -26,6 +26,8 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
             Item.shootSpeed = 17f;
 
+            Item.ArmorPenetration = 2;
+
             Item.crit = 1;
 
             Item.DamageType = DamageClass.Ranged;

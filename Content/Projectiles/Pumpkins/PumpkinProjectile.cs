@@ -107,6 +107,8 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
             Projectile.alpha = 255;
 
+            Projectile.ArmorPenetration = 3;
+
         }
         public override void AI()
         {

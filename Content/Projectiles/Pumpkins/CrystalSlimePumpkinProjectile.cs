@@ -163,7 +163,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 59;
 
-            
+            Projectile.ArmorPenetration = 3;
 
         }
         public override void AI()

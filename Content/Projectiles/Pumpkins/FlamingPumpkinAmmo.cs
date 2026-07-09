@@ -124,6 +124,8 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             Projectile.tileCollide = false;
 
             Projectile.hide = true;
+
+            Projectile.ArmorPenetration = 3;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

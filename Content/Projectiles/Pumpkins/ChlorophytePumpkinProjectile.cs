@@ -24,7 +24,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-
+            
 
         }
 
@@ -115,7 +115,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             {
                 float angle = MathHelper.ToRadians(360f / numProjectiles * i);
                 Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 10f; // Adjust speed as needed
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChloroSpawn>(), Projectile.damage/5, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChloroSpawn>(), Projectile.damage/4, Projectile.knockBack, Projectile.owner);
             }
 
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = 0.5f, PitchVariance = 0.25f }, Projectile.Center);
@@ -139,7 +139,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                 Projectile.usesLocalNPCImmunity = true;
                 Projectile.localNPCHitCooldown = 20;
 
-
+                Projectile.ArmorPenetration = 5;
 
             }
             public override void AI()
