@@ -35,6 +35,8 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
 
             Item.noUseGraphic = false;
             Item.noMelee = false;
+
+            Item.ArmorPenetration = 5;
         }
 
         //make the swing face the cursor

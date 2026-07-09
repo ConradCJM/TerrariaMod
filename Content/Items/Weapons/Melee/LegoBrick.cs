@@ -46,6 +46,8 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.shootSpeed = 25f;
             Item.shoot = ModContent.ProjectileType<LegoProjectile>();
 
+
+            Item.ArmorPenetration = 50;
         }
 
         public override void AddRecipes()

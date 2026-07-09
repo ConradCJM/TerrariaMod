@@ -31,6 +31,8 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.shootSpeed = 30f;
             Item.shoot = ModContent.ProjectileType<NightsBrickProjectile>();
 
+            Item.ArmorPenetration = 15;
+
         }
 
         public override void AddRecipes()

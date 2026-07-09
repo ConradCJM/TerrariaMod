@@ -30,6 +30,8 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.shootSpeed = 30f;
             Item.shoot = ModContent.ProjectileType<StarBrick>(); //star brick
 
+            Item.ArmorPenetration = 25;
+
         }
 
         public override void AddRecipes()

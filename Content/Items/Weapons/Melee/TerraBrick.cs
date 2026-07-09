@@ -31,6 +31,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.shootSpeed = 50f;
             Item.shoot = ModContent.ProjectileType<TerraBrickProjectile>();
 
+            Item.ArmorPenetration = 20;
         }
 
         public override void AddRecipes()

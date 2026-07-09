@@ -27,6 +27,8 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.value = 0;
             Item.useTurn = true;
 
+            Item.ArmorPenetration = 1;
+
         }
 
         public override void AddRecipes() { 
