@@ -129,7 +129,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             {
                 Projectile.width = 16;
                 Projectile.height = 32;
-                Projectile.scale = 1f;
+                Projectile.scale = 1.2f;
                 Projectile.friendly = true;
                 Projectile.tileCollide = false;
                 Projectile.DamageType = DamageClass.Ranged;
@@ -195,7 +195,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
 
                         Projectile.velocity = Projectile.velocity * 1f +
-                           toTarget * 10f;                //add homing force
+                           toTarget * 5f;                //add homing force
                     }
 
                     
