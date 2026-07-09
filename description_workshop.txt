@@ -1,1 +1,9 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+This is my first ever Terraria mod.
+
+This mod adds a variety of new items, weapons, and accessories to enhance your gameplay experience.
+
+All items were recommended by and created for friends. They are designed to be fun and (not very) balanced additions to the game.
+
+This mod has calamity support, meaning that if you have the Calamity Mod installed, you will be able to use the items from this mod alongside the items from Calamity.
+
+Mod is currently in development, and more items will be added in future updates. Please feel free to provide feedback and suggestions for new items or improvements to existing ones.

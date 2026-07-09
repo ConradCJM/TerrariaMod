@@ -28,6 +28,8 @@ namespace SomethingCreative.Content.Projectiles.NightsBrick
 
 
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
         }
 
 
@@ -46,7 +48,7 @@ namespace SomethingCreative.Content.Projectiles.NightsBrick
              Main.rand.NextVector2Circular(10f, 10f),
              150,
              default,
-             1.4f
+             3f
 
           );
             Dust d2 = Dust.NewDustPerfect(
@@ -55,7 +57,7 @@ namespace SomethingCreative.Content.Projectiles.NightsBrick
              Main.rand.NextVector2Circular(10f, 10f),
              150,
              default,
-             1.4f
+             2f
 
           );
             d.noGravity = true;

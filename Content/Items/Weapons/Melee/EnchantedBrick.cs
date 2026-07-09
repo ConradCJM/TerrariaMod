@@ -22,8 +22,8 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.knockBack = 7;
 
-            Item.useAnimation = 35;
-            Item.useTime = 35;
+            Item.useAnimation = 25;
+            Item.useTime = 25;
 
             Item.scale = 1.5f;
             Item.crit = -10;
@@ -64,7 +64,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Projectile.NewProjectile(source, player.Center, velocity, type, damage, knockback, player.whoAmI);
             SoundEngine.PlaySound(SoundID.MaxMana, player.Center);
 
-            modPlayer.projectileCooldown = 60;
+            modPlayer.projectileCooldown = Item.useTime*2;
             return false; 
         }
 
@@ -81,7 +81,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
         {
             if (hit.Crit)
             {
-                int extraDamage = damageDone * 7;
+                int extraDamage = damageDone * 8;
                 target.SimpleStrikeNPC(extraDamage, 0, false, 0, DamageClass.Melee, false, 0, false);
 
                 SoundEngine.PlaySound(SoundID.AbigailAttack, target.Center);

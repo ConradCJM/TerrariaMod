@@ -32,6 +32,9 @@ namespace SomethingCreative.Content.Projectiles.BricksWrath
 
             Projectile.DamageType = DamageClass.Melee;
 
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
+
 
         }
 
@@ -140,7 +143,9 @@ namespace SomethingCreative.Content.Projectiles.BricksWrath
 
 
                 Projectile.DamageType = DamageClass.Melee;
-            }
+                Projectile.usesLocalNPCImmunity = true;
+                Projectile.localNPCHitCooldown = 60;
+        }
 
 
             public override void AI()

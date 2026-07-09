@@ -23,11 +23,13 @@ namespace SomethingCreative.Content.Projectiles.EnchantedBrick
             Projectile.tileCollide = false;
 
             Projectile.penetrate = 3;
-            Projectile.timeLeft = 90;
+            Projectile.timeLeft = 100;
             Projectile.alpha = 0;
 
 
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
         }
 
         public override void AI()
@@ -70,26 +72,30 @@ namespace SomethingCreative.Content.Projectiles.EnchantedBrick
 
             if (Projectile.ai[0] == 30)
             {
-                Projectile.velocity = Vector2.Zero;
-                Projectile.penetrate = 10;
-
-                for (int i = 0; i < 20; i++)
-                {
-                    Dust d2 = Dust.NewDustPerfect(
-                        Projectile.Center,
-                        DustID.MagicMirror,
-                        Main.rand.NextVector2Circular(10f, 10f),
-                        150,
-                        default,
-                        1.4f
-                    );
-                    d2.noGravity = true;
-                }
-
-                SoundEngine.PlaySound(SoundID.Item10, Projectile.Center);
+                stopProjectile();
             }
 
         }
+        private void stopProjectile() {
+            Projectile.velocity = Vector2.Zero;
+            Projectile.penetrate = 10;
+
+            for (int i = 0; i < 20; i++)
+            {
+                Dust d2 = Dust.NewDustPerfect(
+                    Projectile.Center,
+                    DustID.MagicMirror,
+                    Main.rand.NextVector2Circular(10f, 10f),
+                    150,
+                    default,
+                    1.4f
+                );
+                d2.noGravity = true;
+            }
+
+            SoundEngine.PlaySound(SoundID.Item10, Projectile.Center);
+        }
+
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
@@ -120,6 +126,7 @@ namespace SomethingCreative.Content.Projectiles.EnchantedBrick
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            stopProjectile();
             if (hit.Crit)
             {
                 int extraDamage = damageDone * 7;

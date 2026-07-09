@@ -1,1 +1,3 @@
-Modify this file with a description of your mod.
+A mod made for fun that adds items recommended by friends.
+
+Has calamity support.

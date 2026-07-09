@@ -28,6 +28,8 @@ namespace SomethingCreative.Content.Projectiles.BricksWrath
 
 
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
         }
 
 

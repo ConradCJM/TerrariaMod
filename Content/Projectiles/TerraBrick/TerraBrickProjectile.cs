@@ -28,6 +28,8 @@ namespace SomethingCreative.Content.Projectiles.TerraBrick
 
 
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
         }
         
 
@@ -94,7 +96,7 @@ namespace SomethingCreative.Content.Projectiles.TerraBrick
         {
             if (hit.Crit)
             {
-                int extraDamage = damageDone * 4;
+                int extraDamage = damageDone * 5;
                 target.SimpleStrikeNPC(extraDamage, 0, false, 0, DamageClass.Melee, false, 0, false);
 
                 SoundEngine.PlaySound(SoundID.AbigailAttack, target.Center);

@@ -14,7 +14,8 @@ Items: {
 		Tooltip:
 			'''
 			Shoots Enchanted Bricks
-			Citical Hits do a bonus hit that does 7x Damage
+			Melee Crits do a bonus hit that does 8x damage
+			Projectile Citical Hits do a bonus hit that does 7x Damage
 			'''
 	}
 
@@ -38,12 +39,27 @@ Items: {
 
 	BricksWrath: {
 		DisplayName: Bricks Wrath
-		Tooltip: I'm Bricked (Look) Up!
+		Tooltip: 
+		'''
+		Melee Crits do a bonus hit that does 10x damage
+		Star Bricks do 3x bonus damage on a crit
+		Big Star Bricks do 5x damage & 4x bonus damage on a crit
+
+		I'm Bricked (Look) Up!
+		'''
 	}
 
 	LegoBrick: {
 		DisplayName: Lego Brick
-		Tooltip: Is that a brick in your pocket or are you just happy to see me?
+		Tooltip: 
+		'''
+		Melee Crits do a bonus hit that does 10x damage
+		Lego Bricks create explosion that do 3x damage on crits
+		Explosions from lego bricks do 3x bonus damage on a crit
+		Big Lego Bricks do 5x base damage & 5x bonus damage on a crit
+
+		Is that a brick in your pocket or are you just happy to see me?
+		'''
 	}
 
 	DirtPumpkinAmmo: {
