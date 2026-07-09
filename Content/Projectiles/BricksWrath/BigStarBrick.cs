@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil;
+using System;
 using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.Audio;
@@ -218,24 +219,47 @@ namespace SomethingCreative.Content.Projectiles.BricksWrath
             {
                 SoundEngine.PlaySound(SoundID.DD2_KoboldExplosion, Projectile.Center);
 
-            //summon explosion here as projectile
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BigStarBrickExplosion>(), Projectile.damage, 0f, Projectile.owner); // explosion
+                //summon explosion here as projectile
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<BigStarBrickExplosion>(), Projectile.damage, 0f, Projectile.owner); // explosion
 
 
-                //summon star projectiles
-                for (int i = 0; i < 20; i++) 
-                {
-                    var randomAngle = Main.rand.NextFloat(0, MathHelper.TwoPi);
-                    var direction = new Vector2((float)System.Math.Cos(randomAngle), (float)System.Math.Sin(randomAngle));
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, direction * 10f, ModContent.ProjectileType<StarBrick>(), Projectile.damage/20, 0f, Projectile.owner); // star brick
+            int points = 5;             // number of points
+            int total = points * 2;      // outer + inner points
+            float outerRadius = 10f;     // outer points
+            float innerRadius = 5f;      // inner points
+            float angleStep = MathHelper.TwoPi / total;
+            float rotationModifier = Main.rand.NextFloat(0f,MathHelper.TwoPi); // rotation modifier in radians
 
+            for (int i = 0; i < total; i++)
+            {
+                float angle = rotationModifier + angleStep * i;
+
+                // alternate between long and short radii
+                float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+
+                Vector2 direction = new Vector2(
+                    (float)Math.Cos(angle),
+                    (float)Math.Sin(angle)
+                );
+
+                Projectile.NewProjectile(
+                    Projectile.GetSource_FromThis(),
+                    Projectile.Center,
+                    direction * radius,
+                    ModContent.ProjectileType<StarBrick>(),
+                    Projectile.damage/4,
+                    0f,
+                    Projectile.owner
+                );
             }
 
-            }
+
+
+        }
 
 
 
-            public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
             {
 
 

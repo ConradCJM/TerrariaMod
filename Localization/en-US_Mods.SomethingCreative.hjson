@@ -39,27 +39,27 @@ Items: {
 
 	BricksWrath: {
 		DisplayName: Bricks Wrath
-		Tooltip: 
-		'''
-		Melee Crits do a bonus hit that does 10x damage
-		Star Bricks do 3x bonus damage on a crit
-		Big Star Bricks do 5x damage & 4x bonus damage on a crit
+		Tooltip:
+			'''
+			Melee Crits do a bonus hit that does 10x damage
+			Star Bricks do 3x bonus damage on a crit
+			Big Star Bricks do 5x damage & 4x bonus damage on a crit
 
-		I'm Bricked (Look) Up!
-		'''
+			I'm Bricked (Look) Up!
+			'''
 	}
 
 	LegoBrick: {
 		DisplayName: Lego Brick
-		Tooltip: 
-		'''
-		Melee Crits do a bonus hit that does 10x damage
-		Lego Bricks create explosion that do 3x damage on crits
-		Explosions from lego bricks do 3x bonus damage on a crit
-		Big Lego Bricks do 5x base damage & 5x bonus damage on a crit
+		Tooltip:
+			'''
+			Melee Crits do a bonus hit that does 10x damage
+			Lego Bricks create explosion that do 3x damage on crits
+			Explosions from lego bricks do 3x bonus damage on a crit
+			Big Lego Bricks do 5x base damage & 5x bonus damage on a crit
 
-		Is that a brick in your pocket or are you just happy to see me?
-		'''
+			Is that a brick in your pocket or are you just happy to see me?
+			'''
 	}
 
 	DirtPumpkinAmmo: {
