@@ -1,22 +1,39 @@
 Items: {
 	DirtBrick: {
 		DisplayName: Dirt Brick
-		Tooltip: Crits Like a Brick, Citical Hits do a bonus hit that does 10x Damage
+		Tooltip:
+			'''
+			Crits Like a Brick
+
+			Citical Hits do a bonus hit that does 10x Damage
+			'''
 	}
 
 	EnchantedBrick: {
 		DisplayName: Enchanted Brick
-		Tooltip: Shoots Enchanted Bricks, Citical Hits do a bonus hit that does 7x Damage
+		Tooltip:
+			'''
+			Shoots Enchanted Bricks
+			Citical Hits do a bonus hit that does 7x Damage
+			'''
 	}
 
 	NightsBrick: {
 		DisplayName: Nights Brick
-		Tooltip: Shoots a shadow brick that does 5x bonus damage on a crit, Melee Crits do a bonus hit that does 9x damage
+		Tooltip:
+			'''
+			Shoots a shadow brick that does 5x bonus damage on a crit
+			Melee Crits do a bonus hit that does 9x damage
+			'''
 	}
 
 	TerraBrick: {
 		DisplayName: Terra Brick
-		Tooltip: Shoots Terra Bricks that do 4x bonus damage on a crit, Melee Crits do a bonus hit that does 10x damage
+		Tooltip:
+			'''
+			Shoots Terra Bricks that do 4x bonus damage on a crit
+			Melee Crits do a bonus hit that does 10x damage
+			'''
 	}
 
 	BricksWrath: {
@@ -46,7 +63,23 @@ Items: {
 
 	FlamingPumpkinAmmo: {
 		DisplayName: Flaming Pumpkin Ammo
-		Tooltip: Pierces as long as it continues hitting enemies. Explodes into many flaming spores.
+		Tooltip:
+			'''
+			Pierces as long as it continues hitting enemies.
+			Explodes into many flaming spores.
+			'''
+	}
+
+	CrystalSlimePumpkinAmmo: {
+		DisplayName: Crystal Slime Pumpkin Ammo
+		Tooltip:
+			'''
+			Bounces Towards Enemies.
+			Spawns Crystals when hitting a tile or enemy.
+			Amount of crystals spawned is based on how many times the pumpkin bounces.
+			
+			Thank you, Thank you, Thank you.
+			'''
 	}
 }
 
@@ -66,4 +99,6 @@ Projectiles: {
 	PumpkinProjectileExplosion.DisplayName: Pumpkin Projectile Explosion
 	FlamingPumpkinProjectile.DisplayName: Flaming Pumpkin Projectile
 	FlamingPumpkinExplosion.DisplayName: Flaming Pumpkin Explosion
+	CrystalSlimePumpkinProjectile.DisplayName: Crystal Slime Pumpkin Projectile
+	CrystalSpore.DisplayName: Crystal Spore
 }

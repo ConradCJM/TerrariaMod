@@ -114,7 +114,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = -1;
-            Projectile.timeLeft = 60;
+            Projectile.timeLeft = Main.rand.Next(51,74);
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 25;
 
