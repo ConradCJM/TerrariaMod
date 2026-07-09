@@ -17,10 +17,13 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             Projectile.scale = 0.75f;
 
             Projectile.friendly = true;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 600;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
 
 
         }
@@ -114,6 +117,8 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                 Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 10f; // Adjust speed as needed
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChloroSpawn>(), Projectile.damage/5, Projectile.knockBack, Projectile.owner);
             }
+
+            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = 0.5f, PitchVariance = 0.25f }, Projectile.Center);
             
         }
         public class ChloroSpawn : ModProjectile
@@ -132,7 +137,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                 Projectile.timeLeft = 300;
 
                 Projectile.usesLocalNPCImmunity = true;
-                Projectile.localNPCHitCooldown = 60;
+                Projectile.localNPCHitCooldown = 20;
 
 
 
@@ -141,12 +146,32 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             {
                 Projectile.ai[0]++;
                 Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+                if (Projectile.ai[0] % 2 == 0)
+                {
+                    Dust d = Dust.NewDustPerfect(
+                                    Projectile.Center,
+                                    DustID.Chlorophyte,
+                                    Main.rand.NextVector2Circular(5f, 5f),
+                                    150,
+                                    default,
+                                    2f
+                                );
+                    Dust d2 = Dust.NewDustPerfect(
+                                    Projectile.Center,
+                                    DustID.ChlorophyteWeapon,
+                                    Main.rand.NextVector2Circular(5f, 5f),
+                                    150,
+                                    default,
+                                    2f
+                                );
+                    d.noGravity = true;
+                    d2.noGravity = true;
+                }
 
-
-                if (Projectile.ai[0] > 15)
+                if (Projectile.ai[0] > 30)
                 {
                     NPC target = null;
-                    float closestDist = 800f;
+                    float closestDist = 1000f;
 
                     for (int i = 0; i < Main.maxNPCs; i++)
                     {
@@ -173,29 +198,14 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                            toTarget * 10f;                //add homing force
                     }
 
-                    Dust d = Dust.NewDustPerfect(
-                                    Projectile.Center,
-                                    DustID.Chlorophyte,
-                                    Main.rand.NextVector2Circular(5f, 5f),
-                                    150,
-                                    default,
-                                    2f
-                                );
-                    Dust d2 = Dust.NewDustPerfect(
-                                    Projectile.Center,
-                                    DustID.ChlorophyteWeapon,
-                                    Main.rand.NextVector2Circular(5f, 5f),
-                                    150,
-                                    default,
-                                    2f
-                                );
-                    d.noGravity = true;
-                    d2.noGravity = true;
+                    
                 }
             }
 
             public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
             {
+                Projectile.timeLeft -= 20;
+                SoundEngine.PlaySound(SoundID.AbigailAttack with { Pitch = 1.5f, PitchVariance = 0.5f }, Projectile.Center);
 
             }
 

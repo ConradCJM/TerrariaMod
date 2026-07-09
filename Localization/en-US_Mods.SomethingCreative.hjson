@@ -85,10 +85,10 @@ Items: {
 	ChlorophytePumpkinAmmo: {
 		DisplayName: Chlorophyte Pumpkin Ammo
 		Tooltip:
-		'''
-			Homes in on enemies.
+			'''
+			Flys towards enemies when close.
 			Spawns 4-8 homing spores when hitting an enemy.
-		'''
+			'''
 	}
 }
 

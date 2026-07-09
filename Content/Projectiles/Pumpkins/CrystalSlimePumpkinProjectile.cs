@@ -21,6 +21,9 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             Projectile.penetrate = 10;
             Projectile.timeLeft = 300;
 
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 25;
+
 
         }
 
