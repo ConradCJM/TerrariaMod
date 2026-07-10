@@ -110,18 +110,18 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
         public override void OnKill(int timeLeft)
         {
-            int numProjectiles = Main.rand.Next([4,5,6,7,8]); // Number of projectiles to spawn
+            int numProjectiles = Main.rand.Next(4,8); // Number of projectiles to spawn
             for (int i = 0; i < numProjectiles; i++)
             {
                 float angle = MathHelper.ToRadians(360f / numProjectiles * i);
                 Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 10f; // Adjust speed as needed
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChloroSpawn>(), Projectile.damage/4, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChlorophyteSpore>(), Projectile.damage/6, Projectile.knockBack, Projectile.owner);
             }
 
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = 0.5f, PitchVariance = 0.25f }, Projectile.Center);
             
         }
-        public class ChloroSpawn : ModProjectile
+        public class ChlorophyteSpore : ModProjectile
         {
 
 
@@ -139,7 +139,8 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                 Projectile.usesLocalNPCImmunity = true;
                 Projectile.localNPCHitCooldown = 20;
 
-                Projectile.ArmorPenetration = 5;
+                Projectile.ArmorPenetration = 1000;
+                
 
             }
             public override void AI()

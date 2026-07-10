@@ -104,15 +104,19 @@ Items: {
 			'''
 			Flys towards enemies when close.
 			Spawns 4-8 homing spores when hitting an enemy.
+			Spores ignore defense.
 			'''
 	}
 
 	VoidPumpkinAmmo: {
 		DisplayName: Void Pumpkin Ammo
-		Tooltip: 
-		'''
-			
-		'''
+		Tooltip:
+			'''
+			Spawns homing void spores while travelling.
+			Explodes into a void portal that spawn void spores.
+
+			Rift and spores do extra damage.
+			'''
 	}
 }
 
@@ -140,4 +144,5 @@ Projectiles: {
 	VoidPumpkinBlackhole.DisplayName: Void Pumpkin Blackhole
 	VoidSpore.DisplayName: Void Spore
 	VoidPumpkinBlackholeExplosion.DisplayName: Void Pumpkin Blackhole Explosion
+	ChlorophyteSpore.DisplayName: Chlorophyte Spore
 }
