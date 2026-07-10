@@ -118,6 +118,19 @@ Items: {
 			Rift and spores do extra damage.
 			'''
 	}
+
+	HallowedBrick: {
+		DisplayName: Hallowed Brick
+		Tooltip
+		'''
+		Slashes at your cursor.
+		All crits do an additional hit that does 13x bonus damage.
+
+		High armour penetration.
+
+		Hallowed bar, now bigger and better.
+		'''
+	}
 }
 
 Projectiles: {
@@ -145,4 +158,5 @@ Projectiles: {
 	VoidSpore.DisplayName: Void Spore
 	VoidPumpkinBlackholeExplosion.DisplayName: Void Pumpkin Blackhole Explosion
 	ChlorophyteSpore.DisplayName: Chlorophyte Spore
+	HallowedSlash.DisplayName: Hallowed Slash
 }

@@ -9,7 +9,6 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 {
     public class FlamingPumpkinProjectile : ModProjectile
     {
-        private bool hitFlag = false;
         public override void SetDefaults()
         {
             Projectile.width = 54;
