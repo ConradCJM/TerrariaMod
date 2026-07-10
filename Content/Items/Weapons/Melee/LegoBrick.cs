@@ -42,7 +42,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             {
                 Item.rare = ItemRarityID.Master;
             }
-            Item.value = 670000*5;
+            Item.value = 670000;
             Item.shootSpeed = 25f;
             Item.shoot = ModContent.ProjectileType<LegoProjectile>();
 
