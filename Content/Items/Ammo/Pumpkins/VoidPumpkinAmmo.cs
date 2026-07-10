@@ -25,7 +25,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
             Item.knockBack = 0f;
             Item.ammo = ModContent.ItemType<PumpkinAmmo>();
             Item.shoot = ModContent.ProjectileType<VoidPumpkinProjectile>();
-
+            Item.consumable = true;
         }
 
         public override void AddRecipes()

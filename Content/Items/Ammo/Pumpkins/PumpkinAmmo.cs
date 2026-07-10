@@ -25,6 +25,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
             Item.knockBack = 2f;
             Item.ammo = Item.type;
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
+            Item.consumable = true;
 
         }
 

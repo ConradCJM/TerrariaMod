@@ -80,7 +80,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
         public override void OnKill(int timeLeft)
         {
-            int blackholeDamage = Projectile.damage * 6;
+            int blackholeDamage = Projectile.damage * 5;
             Projectile.NewProjectile(
                 Projectile.GetSource_FromThis(),
                 Projectile.Center,
@@ -100,12 +100,12 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             {
                 Projectile.width = 140;
                 Projectile.height = 140;
-                Projectile.scale = 5f;
+                Projectile.scale = 4f;
                 Projectile.friendly = true;
                 Projectile.tileCollide = false;
                 Projectile.DamageType = DamageClass.Ranged;
                 Projectile.penetrate = -1;
-                Projectile.timeLeft = 250;
+                Projectile.timeLeft = 175;
                 Projectile.usesLocalNPCImmunity = true;
                 Projectile.localNPCHitCooldown = 50;
                 Projectile.ArmorPenetration = 100;
@@ -163,7 +163,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
 
             public override void OnKill(int timeLeft)
             {
-                int explosionDamage = Projectile.damage * 4;
+                int explosionDamage = Projectile.damage * 3;
                 SoundEngine.PlaySound(SoundID.DD2_ExplosiveTrapExplode with { PitchVariance = 0.1f}, Projectile.Center);
                 Projectile.NewProjectile(
                     Projectile.GetSource_FromThis(),
@@ -228,7 +228,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                     Dust d = Dust.NewDustPerfect(
                                         Projectile.Center,
                                         DustID.Wraith,
-                                        Main.rand.NextVector2Circular(60f, 60f),
+                                        Main.rand.NextVector2Circular(50f, 50f),
                                         150,
                                         default,
                                         5f
@@ -236,7 +236,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
                     d.noGravity = true;
                 }
                 int sporeDamage = Projectile.damage / (2 * 4);
-                if (Projectile.ai[0] % 5 == 0)
+                if (Projectile.ai[0] % 6 == 0)
                 {
                     Projectile.NewProjectile(
                         Projectile.GetSource_FromThis(),

@@ -115,21 +115,36 @@ Items: {
 			Spawns homing void spores while travelling.
 			Explodes into a void portal that spawn void spores.
 
-			Rift and spores do extra damage.
+			Rift and spores do large damage.
 			'''
 	}
 
 	HallowedBrick: {
 		DisplayName: Hallowed Brick
-		Tooltip
-		'''
-		Slashes at your cursor.
-		All crits do an additional hit that does 13x bonus damage.
+		Tooltip:
+			'''
+			Slashes at your cursor.
+			All crits do an additional hit that does 13x bonus damage.
 
-		High armour penetration.
+			High armour penetration.
 
-		Hallowed bar, now bigger and better.
-		'''
+			Hallowed bar, now bigger and better.
+			'''
+	}
+
+	PumpkinShotgun: {
+		DisplayName: Pumpkin Shotgun
+		Tooltip: Shoots multiple pumpkins at once.
+	}
+
+	BurstPumpkinRifle: {
+		DisplayName: Burst Pumpkin Rifle
+		Tooltip:
+			'''
+			Shoots a burst of high speed pumpkins.
+
+			Ammo damage is 80% effective
+			'''
 	}
 }
 
