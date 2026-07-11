@@ -14,7 +14,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
         {
             Item.width = 52;
             Item.height = 54;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.scale = 0.8f;
 
             Item.value = Item.buyPrice(0);

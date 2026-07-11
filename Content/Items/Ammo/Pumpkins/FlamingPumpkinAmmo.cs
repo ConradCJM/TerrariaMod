@@ -14,7 +14,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
         {
             Item.width = 52;
             Item.height = 54;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.scale = 0.8f;
 
             Item.value = Item.buyPrice(0);
@@ -31,7 +31,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
 
         public override void AddRecipes()
         {
-            Recipe recipe = CreateRecipe(10);
+            Recipe recipe = CreateRecipe(20);
             recipe.AddIngredient(ItemID.FallenStar, 5);
             recipe.AddIngredient(ItemID.HellstoneBar, 5);
             recipe.AddIngredient(ModContent.ItemType<PumpkinAmmo>(), 10);
