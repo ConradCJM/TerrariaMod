@@ -22,7 +22,7 @@ namespace SomethingCreative.Content.Items.Weapons.Melee
             Item.useTime = 20;
 
             Item.scale = 1.25f;
-            Item.crit = -10;
+            Item.crit = 0;
             Item.rare = ItemRarityID.Green;
             Item.value = 0;
             Item.useTurn = true;

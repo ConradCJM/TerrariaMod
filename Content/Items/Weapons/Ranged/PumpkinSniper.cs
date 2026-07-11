@@ -68,7 +68,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.SoulofFright, 15).AddIngredient(ItemID.SoulofMight,15).AddIngredient(ItemID.SoulofSight,15).AddIngredient(ItemID.HallowedBar, 15).AddIngredient(ItemID.AdamantiteBar, 10).AddIngredient(ItemID.Wood, 10).AddTile(TileID.MythrilAnvil).Register();
+            CreateRecipe().AddIngredient(ItemID.SoulofFright, 15).AddIngredient(ItemID.SoulofMight,15).AddIngredient(ItemID.SoulofSight,15).AddIngredient(ItemID.HallowedBar, 15).AddIngredient(ItemID.TitaniumBar, 10).AddIngredient(ItemID.Wood, 10).AddTile(TileID.MythrilAnvil).Register();
             CreateRecipe().AddIngredient(ItemID.SoulofFright, 15).AddIngredient(ItemID.SoulofMight, 15).AddIngredient(ItemID.SoulofSight, 15).AddIngredient(ItemID.HallowedBar, 15).AddIngredient(ItemID.AdamantiteBar, 10).AddIngredient(ItemID.Wood, 10).AddTile(TileID.MythrilAnvil).Register();
         }
 
