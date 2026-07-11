@@ -19,7 +19,7 @@ namespace SomethingCreative.Content.Items.Ammo.Pumpkins
 
             Item.value = Item.buyPrice(0);
             Item.rare = ItemRarityID.Green;
-            Item.damage = 20;
+            Item.damage = 12;
 
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2f;

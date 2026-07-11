@@ -146,6 +146,11 @@ Items: {
 			Ammo damage is 80% effective
 			'''
 	}
+
+	PumpkinSniper: {
+		DisplayName: Pumpkin Sniper
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

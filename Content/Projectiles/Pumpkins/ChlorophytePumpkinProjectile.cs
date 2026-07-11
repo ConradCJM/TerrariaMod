@@ -115,7 +115,7 @@ namespace SomethingCreative.Content.Projectiles.Pumpkins
             {
                 float angle = MathHelper.ToRadians(360f / numProjectiles * i);
                 Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 10f; // Adjust speed as needed
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChlorophyteSpore>(), Projectile.damage/6, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<ChlorophyteSpore>(), Projectile.damage/4, Projectile.knockBack, Projectile.owner);
             }
 
             SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = 0.5f, PitchVariance = 0.25f }, Projectile.Center);

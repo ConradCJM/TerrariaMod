@@ -84,7 +84,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
 
             int finalDamage =(int) (ammoDamage * 0.8f);
             float finalKnockback = ammoKnockback;
-            Vector2 finalVelocity = velocity.SafeNormalize(Vector2.UnitX) * (Item.shootSpeed + speed);
+            Vector2 finalVelocity = velocity.SafeNormalize(Vector2.UnitX) * (Item.shootSpeed);
 
             int proj = Projectile.NewProjectile(currentShot, position, finalVelocity, ammoProj, finalDamage, finalKnockback, player.whoAmI);
             Main.projectile[proj].scale = 0.4f;
