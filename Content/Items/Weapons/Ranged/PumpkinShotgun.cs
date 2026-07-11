@@ -19,7 +19,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
         {
             Item.reuseDelay = 15;
             Item.damage = 3;
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Cyan;
             Item.useAmmo = ModContent.ItemType<PumpkinAmmo>();
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useTime = 30;

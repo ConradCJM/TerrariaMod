@@ -18,7 +18,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
         public override void SetDefaults()
         {
             Item.damage = 17;
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Yellow;
             Item.useAmmo = ModContent.ItemType<PumpkinAmmo>();
             Item.useStyle = ItemUseStyleID.Shoot;
 

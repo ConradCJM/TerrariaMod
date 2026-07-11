@@ -19,7 +19,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
         {
             Item.reuseDelay = 55;
             Item.damage = 167;
-            Item.rare = ItemRarityID.Cyan;
+            Item.rare = ItemRarityID.Yellow;
             Item.useAmmo = ModContent.ItemType<PumpkinAmmo>();
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.useTime = 30;
@@ -30,7 +30,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
             Item.shootSpeed = 35f;
 
-            Item.ArmorPenetration = 100;
+            Item.ArmorPenetration = 167;
 
             Item.crit = 31;
 

@@ -151,6 +151,11 @@ Items: {
 		DisplayName: Pumpkin Sniper
 		Tooltip: ""
 	}
+
+	PumpkinAssultRifle: {
+		DisplayName: Pumpkin Assult Rifle
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
