@@ -156,6 +156,16 @@ Items: {
 		DisplayName: Pumpkin Assult Rifle
 		Tooltip: ""
 	}
+
+	PumpkinFlare: {
+		DisplayName: Pumpkin Flare
+		Tooltip: ""
+	}
+
+	PumpkinFlareGun: {
+		DisplayName: Pumpkin Flare Gun
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
