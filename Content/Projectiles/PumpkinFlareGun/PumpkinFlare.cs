@@ -123,7 +123,11 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
                 return;
             }
 
-            Projectile.velocity.Y += Projectile.velocity.Y * 0.01f;
+            if (Projectile.ai[0] > 60)
+            {
+                Projectile.velocity.Y += 0.23f;
+            }
+            
 
         }
 
@@ -147,7 +151,6 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
             target.AddBuff(BuffID.OnFire, 240);
             target.AddBuff(BuffID.ShadowFlame,240);
             target.AddBuff(BuffID.CursedInferno, 240);
-            target.AddBuff(BuffID.GelBalloonBuff, 240);
 
             if (sticky) return;
             sticky = true;
@@ -192,7 +195,6 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
             target.AddBuff(BuffID.OnFire, 240);
             target.AddBuff(BuffID.ShadowFlame, 240);
             target.AddBuff(BuffID.CursedInferno, 240);
-            target.AddBuff(BuffID.GelBalloonBuff, 240);
         }
         public override void OnKill(int timeLeft)
         {
@@ -332,7 +334,6 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
             target.AddBuff(BuffID.OnFire, 240);
             target.AddBuff(BuffID.ShadowFlame, 240);
             target.AddBuff(BuffID.CursedInferno, 240);
-            target.AddBuff(BuffID.GelBalloonBuff, 240);
         }
 
         public override void AI()

@@ -30,7 +30,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
                 }
             }
             else
-            { 
+            {
                 Item.rare = ItemRarityID.Master;
             }
 
@@ -68,24 +68,80 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             return base.CanUseItem(player);
         }
 
-    }
-    public class SkibidiPlayer : ModPlayer
-    {
-        public int flareCoolDown = 0;
-        
-
-        public override void ResetEffects()
+        public override void AddRecipes()
         {
-            if (flareCoolDown >= 0)
+            Recipe r = CreateRecipe();
+            r.AddIngredient(ItemID.FlareGun, 1);
+            r.AddIngredient(ModContent.ItemType<DirtPumpkinAmmo>(), 67);
+            r.AddIngredient(ModContent.ItemType<PumpkinAmmo>(), 67);
+            r.AddIngredient(ModContent.ItemType<FlamingPumpkinAmmo>(), 67);
+            r.AddIngredient(ModContent.ItemType<CrystalSlimePumpkinAmmo>(), 67);
+            r.AddIngredient(ModContent.ItemType<ChlorophytePumpkinAmmo>(), 67);
+            r.AddIngredient(ModContent.ItemType<VoidPumpkinAmmo>(), 67);
+            if (ModLoader.TryGetMod("CalamityMod", out Mod calamity) && calamity.TryFind<ModTile>("CosmicAnvil", out ModTile cosmicAnvil))
             {
-                flareCoolDown--;
+                if (calamity.TryFind<ModItem>("CosmiliteBar", out ModItem cosmiliteBar))
+                {
+                    r.AddIngredient(cosmiliteBar.Type, 25).AddTile(cosmicAnvil.Type);
+
+                }
 
             }
-            if (flareCoolDown == 0)
+            else
             {
-                SoundEngine.PlaySound(SoundID.Dolphin with { Volume = 5f }, Player.Center);
+                r.AddTile(TileID.LunarCraftingStation);
             }
+            r.AddIngredient(ItemID.LunarBar, 25);
+            r.Register();
+
         }
 
+        public class SkibidiPlayer : ModPlayer
+        {
+            public int flareCoolDown = 0;
+
+
+            public override void ResetEffects()
+            {
+                if (flareCoolDown >= 0)
+                {
+                    flareCoolDown--;
+
+                }
+                if (flareCoolDown == 0)
+                {
+                    SoundEngine.PlaySound(SoundID.AbigailSummon with {Pitch = 0.7f, PitchVariance = 0.2f, Volume = 5f }, Player.Center);
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Dust.NewDustPerfect(
+                                Player.Center,
+                                DustID.GemRuby,
+                                Main.rand.NextVector2Circular(8f, 8f),
+                                150,
+                                default,
+                                1f
+                            );
+                        Dust.NewDustPerfect(
+                                        Player.Center,
+                                        DustID.GemDiamond,
+                                        Main.rand.NextVector2Circular(8f, 8f),
+                                        150,
+                                        default,
+                                        1f
+                                    );
+                        Dust.NewDustPerfect(
+                                            Player.Center,
+                                            DustID.GemAmber,
+                                            Main.rand.NextVector2Circular(1f, 1f),
+                                            150,
+                                            default,
+                                            2f
+                                        );
+                    }
+                }
+            }
+
+        }
     }
 }
