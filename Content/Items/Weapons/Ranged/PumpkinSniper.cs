@@ -28,7 +28,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.knockBack = 7f;
 
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
-            Item.shootSpeed = 35f;
+            Item.shootSpeed = 27f;
 
             Item.ArmorPenetration = 167;
 
@@ -63,6 +63,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
         {
             int proj = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             Main.projectile[proj].scale = 0.4f;
+            Main.projectile[proj].extraUpdates = 2;
             return false;
         }
 

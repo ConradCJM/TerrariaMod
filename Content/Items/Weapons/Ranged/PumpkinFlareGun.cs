@@ -1,5 +1,6 @@
 ﻿using SomethingCreative.Content.Items.Ammo.Pumpkins;
 using SomethingCreative.Content.Items.Weapons.Melee;
+using SomethingCreative.Content.Projectiles.PumpkinFlareGun;
 using SomethingCreative.Content.Projectiles.Pumpkins;
 using System;
 using Terraria;
@@ -13,8 +14,8 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
     {
         public override void SetDefaults()
         {
-            Item.reuseDelay = 55;
-            Item.damage = 1;
+            Item.reuseDelay = 60;
+            Item.damage = 670;
 
             if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
             {
@@ -29,7 +30,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
                 }
             }
             else
-            {
+            { 
                 Item.rare = ItemRarityID.Master;
             }
 
@@ -39,7 +40,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.noMelee = true;
             Item.knockBack = 0f;
 
-            Item.shoot = ProjectileID.RainbowFlare;//make pumpkin flare projectile and put it here
+            Item.shoot = ModContent.ProjectileType<PumpkinFlareProjectile>();
             Item.shootSpeed = 18f;
 
             Item.ArmorPenetration = 300;
@@ -53,7 +54,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
         public override bool? UseItem(Player player)
         {
             var modPlayer = player.GetModPlayer<SkibidiPlayer>();
-            modPlayer.flareCoolDown = 60 * 30;//(60 ticks/1 second) * 30 seconds
+            modPlayer.flareCoolDown = 60 * 45;//(60 ticks/1 second) * 45 seconds
             return base.UseItem(player);
         }
 

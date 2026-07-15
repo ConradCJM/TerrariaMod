@@ -194,4 +194,8 @@ Projectiles: {
 	VoidPumpkinBlackholeExplosion.DisplayName: Void Pumpkin Blackhole Explosion
 	ChlorophyteSpore.DisplayName: Chlorophyte Spore
 	HallowedSlash.DisplayName: Hallowed Slash
+	PumpkinFlare.DisplayName: Pumpkin Flare
+	PumpkinFlareFire.DisplayName: Pumpkin Flare Fire
+	TrollFacePumpkin.DisplayName: Troll Face Pumpkin
+	PumpkinFlareProjectile.DisplayName: Pumpkin Flare Projectile
 }
