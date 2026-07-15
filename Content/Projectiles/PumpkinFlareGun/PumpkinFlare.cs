@@ -37,6 +37,7 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
         public override void OnKill(int timeLeft)
         {
             Vector2 velocity = new(0, -10f);
+            SoundEngine.PlaySound(SoundID.Item74 with { Pitch = 0.6f, PitchVariance = 0.1f}, Projectile.Center);
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<PumpkinFlareFire>(), (int) (Projectile.damage * 0.8f), Projectile.knockBack, Projectile.owner);
         }
 
@@ -213,7 +214,7 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
             SoundEngine.PlaySound(SoundID.DD2_KoboldExplosion, Projectile.Center);
 
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 75; i++)
             {
                 Vector2 randomSpawn = new Vector2(Main.rand.NextFloat(-600f, 600f), Main.rand.NextFloat(0f,600f)) + spawnPosition;
                 Vector2 randomVelocity = new (Main.rand.NextFloat(-7.5f,7.5f), Main.rand.NextFloat(7.5f,18f));
