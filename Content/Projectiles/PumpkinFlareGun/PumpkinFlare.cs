@@ -32,13 +32,12 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
             Projectile.timeLeft = 300;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 15;
+            Projectile.localNPCHitCooldown = 20;
         }
         public override void OnKill(int timeLeft)
         {
-            
             Vector2 velocity = new(0, -10f);
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<PumpkinFlareFire>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<PumpkinFlareFire>(), (int) (Projectile.damage * 0.8f), Projectile.knockBack, Projectile.owner);
         }
 
         public override bool PreDraw(ref Color lightColor)
