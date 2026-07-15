@@ -314,7 +314,7 @@ namespace SomethingCreative.Content.Projectiles.PumpkinFlareGun
             Projectile.timeLeft = 1440;
 
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
+            Projectile.localNPCHitCooldown = 45;
 
             Projectile.alpha = 55;
 
