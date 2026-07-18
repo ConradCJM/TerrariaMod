@@ -171,6 +171,41 @@ Items: {
 		DisplayName: Pumpkin Assault Rifle
 		Tooltip: Rapidly shoots pumpkins
 	}
+
+	XDiv2: {
+		DisplayName: X Div2
+		Tooltip: ""
+	}
+
+	X2: {
+		DisplayName: X2
+		Tooltip: ""
+	}
+
+	XCubed: {
+		DisplayName: X Cubed
+		Tooltip: ""
+	}
+
+	XMinN: {
+		DisplayName: X Min N
+		Tooltip: ""
+	}
+
+	XPlusN: {
+		DisplayName: X Plus N
+		Tooltip: ""
+	}
+
+	XSquared: {
+		DisplayName: X Squared
+		Tooltip: ""
+	}
+
+	XTimesN: {
+		DisplayName: X Times N
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -203,4 +238,11 @@ Projectiles: {
 	PumpkinFlareFire.DisplayName: Pumpkin Flare Fire
 	TrollFacePumpkin.DisplayName: Troll Face Pumpkin
 	PumpkinFlareProjectile.DisplayName: Pumpkin Flare Projectile
+	RecursiveDivBolt.DisplayName: Recursive Div Bolt
+	RecursiveDoubleBolt.DisplayName: Recursive Double Bolt
+	RecursiveCubedBolt.DisplayName: Recursive Cubed Bolt
+	RecursiveMinBolt.DisplayName: Recursive Min Bolt
+	RecursiveAddBolt.DisplayName: Recursive Add Bolt
+	RecursiveSquaredBolt.DisplayName: Recursive Squared Bolt
+	RecursiveXTimesNBolt.DisplayName: Recursive X Times N Bolt
 }
