@@ -149,27 +149,27 @@ Items: {
 
 	PumpkinSniper: {
 		DisplayName: Pumpkin Sniper
-		Tooltip: ""
-	}
+		Tooltip:
+			'''
+			Shoots high speed pumpkins that do large damage.
 
-	PumpkinAssultRifle: {
-		DisplayName: Pumpkin Assult Rifle
-		Tooltip: ""
-	}
-
-	PumpkinFlare: {
-		DisplayName: Pumpkin Flare
-		Tooltip: ""
+			Right click to scope.
+			'''
 	}
 
 	PumpkinFlareGun: {
 		DisplayName: Pumpkin Flare Gun
-		Tooltip: ""
+		Tooltip:
+			'''
+			Pumpkin rain :)
+
+			He's admin abusing!
+			'''
 	}
 
 	PumpkinAssaultRifle: {
 		DisplayName: Pumpkin Assault Rifle
-		Tooltip: ""
+		Tooltip: Rapidly shoots pumpkins
 	}
 }
 
