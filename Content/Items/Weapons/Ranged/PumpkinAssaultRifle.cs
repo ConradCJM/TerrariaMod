@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace SomethingCreative.Content.Items.Weapons.Ranged
 {
-    public class PumpkinAssultRifle : ModItem
+    public class PumpkinAssaultRifle : ModItem
     {
 
         public override void SetDefaults()

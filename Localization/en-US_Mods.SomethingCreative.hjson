@@ -143,7 +143,7 @@ Items: {
 			'''
 			Shoots a burst of high speed pumpkins.
 
-			Ammo damage is 80% effective
+			Ammo damage is 20% less effective
 			'''
 	}
 
@@ -164,6 +164,11 @@ Items: {
 
 	PumpkinFlareGun: {
 		DisplayName: Pumpkin Flare Gun
+		Tooltip: ""
+	}
+
+	PumpkinAssaultRifle: {
+		DisplayName: Pumpkin Assault Rifle
 		Tooltip: ""
 	}
 }

@@ -26,6 +26,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.useAnimation = 30;
             Item.noMelee = true;
             Item.knockBack = 7f;
+            Item.scale = 1.5f;
 
             Item.shoot = ModContent.ProjectileType<PumpkinProjectile>();
             Item.shootSpeed = 27f;

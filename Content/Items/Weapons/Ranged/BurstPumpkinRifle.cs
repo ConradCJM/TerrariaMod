@@ -21,6 +21,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.rare = ItemRarityID.Yellow;
             Item.useAmmo = ModContent.ItemType<PumpkinAmmo>();
             Item.useStyle = ItemUseStyleID.Shoot;
+            Item.scale = 1.3f;
 
             Item.useTime = 20;
             Item.useAnimation = 20;
@@ -96,8 +97,8 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.SoulofFlight, 5).AddIngredient(ItemID.CobaltBar, 10).AddIngredient(ItemID.Wood, 15).AddIngredient(ItemID.IllegalGunParts).AddTile(TileID.Anvils).Register();
-            CreateRecipe().AddIngredient(ItemID.SoulofFlight, 5).AddIngredient(ItemID.PalladiumBar, 10).AddIngredient(ItemID.Wood, 15).AddIngredient(ItemID.IllegalGunParts).AddTile(TileID.Anvils).Register();
+            CreateRecipe().AddIngredient(ItemID.SoulofFlight, 5).AddIngredient(ItemID.CrystalShard, 15).AddIngredient(ItemID.CobaltBar, 10).AddIngredient(ItemID.Wood, 15).AddIngredient(ItemID.IllegalGunParts).AddTile(TileID.Anvils).Register();
+            CreateRecipe().AddIngredient(ItemID.SoulofFlight, 5).AddIngredient(ItemID.CrystalShard, 15).AddIngredient(ItemID.PalladiumBar, 10).AddIngredient(ItemID.Wood, 15).AddIngredient(ItemID.IllegalGunParts).AddTile(TileID.Anvils).Register();
         }
     }
 }
