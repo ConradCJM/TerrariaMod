@@ -30,12 +30,13 @@ namespace SomethingCreative.Content.Projectiles.XDiv2
         }
         public override void AI()
         {
+            Color colour = new(255, 127, 100);
             Dust d = Dust.NewDustPerfect(
                 Projectile.Center,
                 DustID.GemDiamond,
                 Main.rand.NextVector2Circular(0.1f, 0.1f),
                 150,
-                default,
+                colour,
                 1.5f
             );
             d.noGravity = true;
@@ -45,10 +46,11 @@ namespace SomethingCreative.Content.Projectiles.XDiv2
         {
             int damage = damageDone;
             int chance = 50;
+            bool crit = hit.Crit;
             while (Main.rand.Next(0, 100) < chance)
             {
                 damage = damage / 2;
-                target.SimpleStrikeNPC(damage, 0, true, 0, DamageClass.Magic, false, 0, false);
+                target.SimpleStrikeNPC(damage, 0, crit, 0, DamageClass.Magic, false, 0, false);
                 chance--;
             }
         }

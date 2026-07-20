@@ -174,37 +174,58 @@ Items: {
 
 	XDiv2: {
 		DisplayName: X Div2
-		Tooltip: ""
+		Tooltip:
+			'''
+			Shoots a bolt that has a chance to hit again for half damage. 
+			Those hits also have a chance to hit again for half damage, and so on.
+
+			Uses all the users mana and does more damage based on the mana used.
+			'''
 	}
 
 	X2: {
 		DisplayName: X2
-		Tooltip: ""
-	}
+		Tooltip:
+			'''
+			Shoots a bolt that has a chance to hit again for double damage. 
+			Those hits also have a chance to hit again for double damage, and so on.
 
-	XCubed: {
-		DisplayName: X Cubed
-		Tooltip: ""
+			Uses all the users mana and does more damage based on the mana used.
+			'''
 	}
 
 	XMinN: {
 		DisplayName: X Min N
-		Tooltip: ""
+		Tooltip:
+			'''
+			Shoots a bolt that has a chance to hit again for half to full damage. 
+			Those hits also have a chance to hit again for half to full damage, and so on.
+
+			Uses all the users mana and does more damage based on the mana used.
+			'''
 	}
 
 	XPlusN: {
 		DisplayName: X Plus N
-		Tooltip: ""
-	}
+		Tooltip:
+			'''
+			Shoots a bolt that has a chance to hit again for up to double damage. 
+			Those hits also have a chance to hit again for up to double damage, and so on.
 
-	XSquared: {
-		DisplayName: X Squared
-		Tooltip: ""
+			Uses all the users mana and does more damage based on the mana used.
+			'''
 	}
 
 	XTimesN: {
 		DisplayName: X Times N
-		Tooltip: ""
+		Tooltip:
+			'''
+			Shoots a bolt that has a chance to hit again for 2x up to 20x damage. 
+			Those hits also have a chance to hit again for 2x up to 20x, and so on.
+
+			Uses all the users mana and does more damage based on the mana used.
+			Each critical hit heals mana. 
+			'''
 	}
 }
 

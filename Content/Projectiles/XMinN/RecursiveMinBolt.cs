@@ -35,7 +35,7 @@ namespace SomethingCreative.Content.Projectiles.XMinN
                 DustID.GemDiamond,
                 Main.rand.NextVector2Circular(0.1f, 0.1f),
                 150,
-                default,
+                new Color(157, 195, 219),
                 1.5f
             );
             d.noGravity = true;
@@ -45,10 +45,13 @@ namespace SomethingCreative.Content.Projectiles.XMinN
         {
             int damage = damageDone;
             int chance = 50;
+            bool crit = hit.Crit;
             while (Main.rand.Next(0, 100) < chance)
             {
+                
                 damage = damage - Main.rand.Next(0,damage/2);
-                target.SimpleStrikeNPC(damage, 0, true, 0, DamageClass.Magic, false, 0, false);
+                target.SimpleStrikeNPC(damage, 0, crit, 0, DamageClass.Magic, false, 0, false);
+                
                 chance--;
             }
         }

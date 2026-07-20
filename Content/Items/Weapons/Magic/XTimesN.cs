@@ -15,11 +15,31 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.shootSpeed = 20f;
-            Item.damage = 169;
+            Item.damage = 200;
             Item.DamageType = DamageClass.Magic;
             Item.useTime = 60;
             Item.useAnimation = 60;
+            Item.scale = 3f;
+            Item.mana = 20;
+            Item.alpha = 100;
+            Item.crit = 16;
+            Item.UseSound = SoundID.DD2_DarkMageHealImpact with { PitchVariance = 0.2f, Pitch = 0.3f };
+            if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+            {
+                if (calamity.TryFind<ModRarity>("CalamityRed", out ModRarity CalamityRed))
+                {
+                    Item.rare = CalamityRed.Type;
 
+                }
+                else
+                {
+                    Item.rare = ItemRarityID.Master;
+                }
+            }
+            else
+            {
+                Item.rare = ItemRarityID.Master;
+            }
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
@@ -60,10 +80,23 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.IronBar, 15).AddIngredient(ItemID.ManaCrystal, 3).AddTile(TileID.Anvils);
-            CreateRecipe().AddIngredient(ItemID.LeadBar, 15).AddIngredient(ItemID.ManaCrystal, 3).AddTile(TileID.Anvils);
+            Recipe r = CreateRecipe().AddIngredient(ModContent.ItemType<X2>()).AddIngredient(ItemID.LastPrism).AddIngredient(ItemID.LunarOre,67);
+
+            if (ModLoader.TryGetMod("CalamityMod", out Mod calamity) && calamity.TryFind<ModTile>("CosmicAnvil", out ModTile cosmicAnvil))
+            {
+                if (calamity.TryFind<ModItem>("CosmiliteBar", out ModItem cosmiliteBar))
+                {
+                    r.AddIngredient(cosmiliteBar.Type, 25).AddTile(cosmicAnvil.Type);
+
+                }
+            }
+            else
+            {
+                r.AddTile(TileID.LunarCraftingStation);
+            }
+            r.Register();
         }
 
-        
+
     }
 }

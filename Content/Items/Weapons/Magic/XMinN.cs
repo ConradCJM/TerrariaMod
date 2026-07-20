@@ -20,7 +20,12 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
             Item.DamageType = DamageClass.Magic;
             Item.useTime = 60;
             Item.useAnimation = 60;
-
+            Item.scale = 0.35f;
+            Item.mana = 20;
+            Item.alpha = 100;
+            Item.crit = 6;
+            Item.rare = ItemRarityID.Lime;
+            Item.UseSound = SoundID.DD2_DarkMageHealImpact with { PitchVariance = 0.2f, Pitch = 0.3f };
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
@@ -61,8 +66,7 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.IronBar, 15).AddIngredient(ItemID.ManaCrystal, 3).AddTile(TileID.Anvils);
-            CreateRecipe().AddIngredient(ItemID.LeadBar, 15).AddIngredient(ItemID.ManaCrystal, 3).AddTile(TileID.Anvils);
+            CreateRecipe().AddIngredient(ModContent.ItemType<XDiv2>()).AddIngredient(ItemID.Diamond, 5).AddIngredient(ItemID.WaterBolt).AddTile(TileID.DemonAltar).Register();
         }
 
         

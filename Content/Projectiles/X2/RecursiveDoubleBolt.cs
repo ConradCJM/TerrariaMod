@@ -11,6 +11,7 @@ namespace SomethingCreative.Content.Projectiles.X2
 {
     public class RecursiveDoubleBolt : ModProjectile
     {
+        private bool useFirstColour = true;
         public override void SetDefaults()
         {
             Projectile.extraUpdates = 10;
@@ -30,12 +31,18 @@ namespace SomethingCreative.Content.Projectiles.X2
         }
         public override void AI()
         {
+            Color color = useFirstColour
+        ? new Color(244, 68, 255)
+        : new Color(158, 227, 255);
+
+            useFirstColour = !useFirstColour;
+
             Dust d = Dust.NewDustPerfect(
                 Projectile.Center,
                 DustID.GemDiamond,
                 Main.rand.NextVector2Circular(0.1f, 0.1f),
                 150,
-                default,
+                color,
                 1.5f
             );
             d.noGravity = true;
@@ -45,10 +52,11 @@ namespace SomethingCreative.Content.Projectiles.X2
         {
             int damage = damageDone;
             int chance = 50;
+            bool crit = hit.Crit;
             while (Main.rand.Next(0, 100) < chance)
             {
                 damage = 2*damage;
-                target.SimpleStrikeNPC(damage, 0, true, 0, DamageClass.Magic, false, 0, false);
+                target.SimpleStrikeNPC(damage, 0, crit, 0, DamageClass.Magic, false, 0, false);
                 chance--;
             }
         }

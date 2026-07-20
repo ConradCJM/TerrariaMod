@@ -18,11 +18,16 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.shootSpeed = 20f;
-            Item.damage = 167;
+            Item.damage = 169;
             Item.DamageType = DamageClass.Magic;
             Item.useTime = 60;
             Item.useAnimation = 60;
-
+            Item.scale = 0.35f;
+            Item.mana = 20;
+            Item.alpha = 100;
+            Item.crit = 12;
+            Item.rare = ItemRarityID.Purple;
+            Item.UseSound = SoundID.DD2_DarkMageHealImpact with { PitchVariance = 0.2f, Pitch = 0.3f };
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
@@ -63,8 +68,7 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemID.IronBar, 15).AddIngredient(ItemID.ManaCrystal, 3).AddTile(TileID.Anvils);
-            CreateRecipe().AddIngredient(ItemID.LeadBar, 15).AddIngredient(ItemID.ManaCrystal, 3).AddTile(TileID.Anvils);
+            CreateRecipe().AddIngredient(ModContent.ItemType<XPlusN>()).AddIngredient(ItemID.AvengerEmblem).AddIngredient(ItemID.FragmentNebula, 15).AddIngredient(ItemID.SpectreBar, 30).AddTile(TileID.LunarCraftingStation).Register();
         }
 
         
