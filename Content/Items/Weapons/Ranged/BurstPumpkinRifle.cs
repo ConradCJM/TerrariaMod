@@ -26,6 +26,7 @@ namespace SomethingCreative.Content.Items.Weapons.Ranged
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.reuseDelay = 20;
+            Item.autoReuse = true;
 
             Item.noMelee = true;
             Item.knockBack = 4f;
