@@ -7,6 +7,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.UI.ModBrowser;
 
 namespace SomethingCreative.Content.Projectiles.XTimesN
 {
@@ -99,27 +100,33 @@ namespace SomethingCreative.Content.Projectiles.XTimesN
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int damage = damageDone;
-            int chance = Main.rand.Next(50,75);
+            int chance = Main.rand.Next(45,70);
             bool crit = hit.Crit;
-            int manaRecoverAmount = 35;
-            if (crit) healMana(manaRecoverAmount);
+            int manaRecoverAmount = 0;
+            int initialManaRecoverAmount = chance-25;
 
+            if (crit)
+            {
+                manaRecoverAmount = initialManaRecoverAmount;
+            }
             while (Main.rand.Next(0, 100) < chance)
             {
                 
                 damage = damage * Main.rand.Next(2, 20);
                 target.SimpleStrikeNPC(damage, 0, crit, 0, DamageClass.Magic, false, 0, false);
-
-                if (crit) healMana(manaRecoverAmount--);
-                
+                if (crit)
+                {
+                    manaRecoverAmount += --initialManaRecoverAmount;
+                }
                 chance--;
             }
-        }
-        private void healMana(int amount)
-        {
-            Player player = Main.player[Projectile.owner];
-            player.statMana += amount;
-            player.ManaEffect(amount);
+
+            if (crit)
+            {
+                Player player = Main.player[Projectile.owner];
+                player.statMana += manaRecoverAmount;
+                player.ManaEffect(manaRecoverAmount);
+            }
         }
     }
 }

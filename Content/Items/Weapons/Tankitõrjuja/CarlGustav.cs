@@ -102,7 +102,6 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             //start charging
             if (holdingM1)
             {
-                
 
                 chargeTimer++;
 
