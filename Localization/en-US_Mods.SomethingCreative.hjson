@@ -278,6 +278,8 @@ Projectiles: {
 	RecursiveXTimesNBolt.DisplayName: Recursive X Times N Bolt
 	CarlGustavHeldProj.DisplayName: Carl Gustav Held Proj
 	IglaHeldProj.DisplayName: Igla Held Proj
+	ExhaustFlame.DisplayName: Exhaust Flame
+	CarlGustavProj.DisplayName: Carl Gustav Proj
 }
 
 DamageClasses.TankitõrjujaDamage.DisplayName: Tankitõrjuja Damage

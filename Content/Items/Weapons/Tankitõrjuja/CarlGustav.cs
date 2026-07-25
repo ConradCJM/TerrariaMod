@@ -10,6 +10,8 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.Audio;
+using System.Runtime.CompilerServices;
 
 namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 {
@@ -28,7 +30,6 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.rare = ItemRarityID.Orange;
             Item.crit = 6;
-
             Item.shootSpeed = 0f;
         }
 
@@ -50,6 +51,14 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             
             return true;
         }
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe();
+            recipe.AddRecipeGroup("IronBar", 40);
+            recipe.AddIngredient(ItemID.Wood, 15);
+            recipe.AddTile(TileID.Anvils);
+            recipe.Register();
+        }
     }
 
     public class CarlGustavHeldProj : ModProjectile
@@ -65,6 +74,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
+            
             
 
             Projectile.timeLeft = 2;
@@ -86,6 +96,13 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             //Main.NewText("Current Charge: " + chargeTimer);
 
             Player player = Main.player[Projectile.owner];
+
+            //force the player to stay on the Carl Gustav item slot
+            player.selectedItem = player.FindItem(ModContent.ItemType<CarlGustav>());
+
+            player.itemTime = 2;
+            player.itemAnimation = 2;
+
             var p = player.GetModPlayer<CarlGustavPlayer>();
 
             //keep projectile alive
@@ -119,7 +136,8 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             if (holdingM1)
             {
                 if (chargeTimer == 0)
-                    CombatText.NewText(player.Hitbox, Color.LightYellow, "Preparing to Fire!");
+                    
+                CombatText.NewText(player.Hitbox, Color.LightYellow, "Preparing to Fire!");
 
                 chargeTimer++;
 
@@ -129,6 +147,10 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                         CombatText.NewText(player.Hitbox, Color.LightYellow, "Ready to Fire!");
 
                     readyToFire = true;
+                }
+                else if (chargeTimer < 60 && chargeTimer % 6 == 0)
+                {
+                    SoundEngine.PlaySound(SoundID.DrumClosedHiHat with { Pitch = -1.2f + (chargeTimer / 60f) * 0.6f, Volume = 0.2f}, player.Center);
                 }
             }
             else
@@ -155,6 +177,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             //consume ammo
             p.ammoCount--;
             p.loadingTimer = 120;
+            SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { Pitch = -0.3f, PitchVariance = 0.2f }, player.Center);
             if (p.ammoCount <= 0)
             {
                 p.isReloading = true;
@@ -168,16 +191,161 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             //fire projectile
             Vector2 velocity = player.DirectionTo(Main.MouseWorld) * 10f;
+            
 
             Projectile.NewProjectile(
                 Projectile.GetSource_FromThis(),
                 player.Center,
                 velocity,
-                ProjectileID.Bullet, // replace with custom ammo
+                ModContent.ProjectileType<CarlGustavProj>(),
                 player.GetWeaponDamage(player.HeldItem),
                 player.GetWeaponKnockback(player.HeldItem),
                 player.whoAmI
             );
+
+            //fire flame effect from back of rifle
+            Projectile.NewProjectile(
+                Projectile.GetSource_FromThis(),
+                player.Center,
+                -velocity,
+                ModContent.ProjectileType<ExhaustFlame>(),
+                (int)(player.GetWeaponDamage(player.HeldItem) * 0.2f),
+                0f,
+                player.whoAmI
+            );
+        }
+    }
+
+    public class CarlGustavProj : ModProjectile
+    {
+        private int damageLeft;
+        private bool initialized = false;
+
+        public override void SetDefaults()
+        {
+            Projectile.width = 237;
+            Projectile.height = 26;
+            Projectile.scale = 0.25f;
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = true;
+            Projectile.ignoreWater = true;
+            Projectile.timeLeft = 600;
+            Projectile.extraUpdates = 7;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+
+            Vector2 origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
+
+            float alphaMult = (255 - Projectile.alpha) / 255f;
+
+            Color drawColor = lightColor * alphaMult;
+
+            Main.EntitySpriteDraw(
+                texture,
+                Projectile.Center - Main.screenPosition,
+                null,
+                drawColor,
+                Projectile.rotation,
+                origin,
+                Projectile.scale,
+                SpriteEffects.None,
+                0
+            );
+
+            return false;
+        }
+
+        public override void AI()
+        {
+            if (!initialized)
+            {
+                damageLeft = Projectile.damage;
+                initialized = true;
+            }
+
+            Projectile.rotation = Projectile.velocity.ToRotation();
+
+            if (Projectile.timeLeft < 480)
+                Projectile.velocity.Y += 0.1f;
+
+            if (Main.rand.NextBool())
+            {
+                var d = Dust.NewDustPerfect(
+                    Projectile.Center,
+                    DustID.GemDiamond,
+                    Main.rand.NextVector2Circular(5f, 5f),
+                    150,
+                    default,
+                    Main.rand.NextFloat(0.1f, 2f)
+                );
+                d.noGravity = true;
+            }
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            damageLeft -= 40 + damageLeft/2;
+            Projectile.damage = damageLeft;
+            if (damageLeft <= 0)
+                Projectile.Kill();
+        }
+    }
+
+
+    public class ExhaustFlame : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 15;
+            Projectile.height = 15;
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+            Projectile.ignoreWater = true;
+            Projectile.timeLeft = 10;
+            Projectile.alpha = 255;
+            Projectile.hostile = true;
+            Projectile.extraUpdates = 3;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
+        }
+        public override void AI()
+        {
+            //spawn dust for visual effect
+            Dust.NewDustPerfect(
+                Projectile.Center,
+                DustID.GemAmber,
+                Main.rand.NextVector2Circular(2f, 2f),
+                150,
+                default,
+                4f
+            );
+            Dust.NewDustPerfect(
+                Projectile.Center,
+                DustID.Flare,
+                Main.rand.NextVector2Circular(2f, 2f),
+                150,
+                default,
+                4f
+            );
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.OnFire, 300);
+        }
+        public override bool CanHitPlayer(Player target)
+        {
+            return target.whoAmI != Projectile.owner;
+        }
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            target.AddBuff(BuffID.OnFire, 300);            
         }
     }
 
@@ -210,7 +378,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                     ammoCount = 10;
                     
                     
-                    CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocked! Ammo: {ammoCount}");
+                    CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocked! Now Loading! Ammo: {ammoCount}");
                 }
             }
         }
