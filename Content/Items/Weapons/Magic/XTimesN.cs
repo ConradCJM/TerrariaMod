@@ -41,6 +41,10 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
                 Item.rare = ItemRarityID.Master;
             }
         }
+        public override void SetStaticDefaults()
+        {
+            Item.staff[Item.type] = true;
+        }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
             Vector2 direction = Main.MouseWorld - player.Center;

@@ -27,6 +27,10 @@ namespace SomethingCreative.Content.Items.Weapons.Magic
             Item.rare = ItemRarityID.Lime;
             Item.UseSound = SoundID.DD2_DarkMageHealImpact with { PitchVariance = 0.2f, Pitch = 0.3f };
         }
+        public override void SetStaticDefaults()
+        {
+            Item.staff[Item.type] = true;
+        }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
             Vector2 direction = Main.MouseWorld - player.Center;
