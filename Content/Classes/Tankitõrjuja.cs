@@ -13,11 +13,11 @@ namespace SomethingCreative.Content.Classes
                 return StatInheritanceData.Full;
 
             return new StatInheritanceData(
-                damageInheritance: 0f,
-                critChanceInheritance: 0f,
-                attackSpeedInheritance: 0f,
-                armorPenInheritance: 0f,
-                knockbackInheritance: 0f);
+                damageInheritance: 0.1f,
+                critChanceInheritance: 0.1f,
+                attackSpeedInheritance: 0.1f,
+                armorPenInheritance: 0.1f,
+                knockbackInheritance: 0.1f);
         }
 
         public override bool GetEffectInheritance(DamageClass damageClass)
@@ -27,10 +27,14 @@ namespace SomethingCreative.Content.Classes
 
         public override void SetDefaultStats(Player player)
         {
-            player.GetArmorPenetration<TankitõrjujaDamage>() += 500;
-            
+            player.GetArmorPenetration<TankitõrjujaDamage>() += 9999;
         }
 
         public override bool UseStandardCritCalcs => true;
+
+        public override bool ShowStatTooltipLine(Player player, string lineName)
+        {
+            return base.ShowStatTooltipLine(player, lineName);
+        }
     }
 }

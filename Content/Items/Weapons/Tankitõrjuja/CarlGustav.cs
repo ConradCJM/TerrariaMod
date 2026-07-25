@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 {
@@ -17,6 +18,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         public override void SetDefaults()
         {
             Item.DamageType = ModContent.GetInstance<Classes.TankitõrjujaDamage>();
+            Item.damage = 169;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.channel = true;
@@ -25,6 +27,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             Item.shoot = ModContent.ProjectileType<CarlGustavHeldProj>();
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.rare = ItemRarityID.Orange;
+            Item.crit = 6;
 
             Item.shootSpeed = 0f;
         }
@@ -32,7 +35,20 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var p = player.GetModPlayer<CarlGustavPlayer>();
-            return !p.isReloading;
+
+            if (p.isReloading)
+            {
+                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocking {p.reloadTimer / 60} seconds left");
+                return false;
+            }
+
+            if (p.loadingTimer > 0)
+            {
+                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Loading {p.loadingTimer / 60} seconds left");
+                return false;
+            }
+            
+            return true;
         }
     }
 
@@ -80,7 +96,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
 
             //draw projectile
-            Vector2 offset = new (-100, -10);
+            Vector2 offset = new (-107, -10);
 
             Projectile.Center = player.MountedCenter + offset;
 
@@ -102,11 +118,18 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             //start charging
             if (holdingM1)
             {
+                if (chargeTimer == 0)
+                    CombatText.NewText(player.Hitbox, Color.LightYellow, "Preparing to Fire!");
 
                 chargeTimer++;
 
                 if (chargeTimer >= 60)
+                {
+                    if (!readyToFire)
+                        CombatText.NewText(player.Hitbox, Color.LightYellow, "Ready to Fire!");
+
                     readyToFire = true;
+                }
             }
             else
             {
@@ -131,15 +154,16 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             //consume ammo
             p.ammoCount--;
+            p.loadingTimer = 120;
             if (p.ammoCount <= 0)
             {
                 p.isReloading = true;
                 p.reloadTimer = 600;
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Reloading! Ammo: {p.ammoCount}");
+                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocking! Ammo: {p.ammoCount}");
             }
             else
             {
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Ammo: {p.ammoCount}");
+                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Loading Ammo! Ammo: {p.ammoCount}");
             }
 
             //fire projectile
@@ -162,11 +186,21 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
     public class CarlGustavPlayer : ModPlayer
     {
         public int ammoCount = 10;
+        public int loadingTimer = 0;
         public int reloadTimer = 0;
         public bool isReloading = false;
 
         public override void PostUpdate()
         {
+            Player player = Player;
+            if (loadingTimer >= 0 && !isReloading) 
+            {
+                loadingTimer--;
+            }
+            if (loadingTimer == 0)
+            {
+                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Ammo Loaded! Ammo: {ammoCount}");
+            }
             if (isReloading)
             {
                 reloadTimer--;
@@ -175,8 +209,8 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                     isReloading = false;
                     ammoCount = 10;
                     
-                    Player player = Player;
-                    CombatText.NewText(player.Hitbox, Color.LightYellow, $"Reloaded! Ammo: {ammoCount}");
+                    
+                    CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocked! Ammo: {ammoCount}");
                 }
             }
         }
