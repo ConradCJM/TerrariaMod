@@ -227,6 +227,11 @@ Items: {
 			Each critical hit heals mana. 
 			'''
 	}
+
+	CarlGustav: {
+		DisplayName: Carl Gustav
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -266,4 +271,7 @@ Projectiles: {
 	RecursiveAddBolt.DisplayName: Recursive Add Bolt
 	RecursiveSquaredBolt.DisplayName: Recursive Squared Bolt
 	RecursiveXTimesNBolt.DisplayName: Recursive X Times N Bolt
+	CarlGustavHeldProj.DisplayName: Carl Gustav Held Proj
 }
+
+DamageClasses.TankitõrjujaDamage.DisplayName: Tankitõrjuja Damage
