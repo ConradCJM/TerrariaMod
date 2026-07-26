@@ -280,6 +280,7 @@ Projectiles: {
 	IglaHeldProj.DisplayName: Igla Held Proj
 	ExhaustFlame.DisplayName: Exhaust Flame
 	CarlGustavProj.DisplayName: Carl Gustav Proj
+	IglaProj.DisplayName: Igla Proj
 }
 
 DamageClasses.TankitõrjujaDamage.DisplayName: Tankitõrjuja Damage

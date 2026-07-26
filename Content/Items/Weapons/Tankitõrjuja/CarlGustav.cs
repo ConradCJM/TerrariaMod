@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.Audio;
 using System.Runtime.CompilerServices;
+using SomethingCreative.Content.Projectiles.Tankitõrjuja;
 
 namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 {
@@ -231,7 +232,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
-            Projectile.extraUpdates = 7;
+            Projectile.extraUpdates = 5;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
         }
@@ -271,8 +272,8 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             Projectile.rotation = Projectile.velocity.ToRotation();
 
-            if (Projectile.timeLeft < 480)
-                Projectile.velocity.Y += 0.1f;
+            if (Projectile.timeLeft < 300)
+                Projectile.velocity.Y += 0.001f;
 
             if (Main.rand.NextBool())
             {
@@ -296,61 +297,6 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                 Projectile.Kill();
         }
     }
-
-
-    public class ExhaustFlame : ModProjectile
-    {
-        public override void SetDefaults()
-        {
-            Projectile.width = 15;
-            Projectile.height = 15;
-            Projectile.friendly = true;
-            Projectile.penetrate = -1;
-            Projectile.tileCollide = false;
-            Projectile.ignoreWater = true;
-            Projectile.timeLeft = 10;
-            Projectile.alpha = 255;
-            Projectile.hostile = true;
-            Projectile.extraUpdates = 3;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = -1;
-        }
-        public override void AI()
-        {
-            //spawn dust for visual effect
-            Dust.NewDustPerfect(
-                Projectile.Center,
-                DustID.GemAmber,
-                Main.rand.NextVector2Circular(2f, 2f),
-                150,
-                default,
-                4f
-            );
-            Dust.NewDustPerfect(
-                Projectile.Center,
-                DustID.Flare,
-                Main.rand.NextVector2Circular(2f, 2f),
-                150,
-                default,
-                4f
-            );
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(BuffID.OnFire, 300);
-        }
-        public override bool CanHitPlayer(Player target)
-        {
-            return target.whoAmI != Projectile.owner;
-        }
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            target.AddBuff(BuffID.OnFire, 300);            
-        }
-    }
-
-
-
     public class CarlGustavPlayer : ModPlayer
     {
         public int ammoCount = 10;
