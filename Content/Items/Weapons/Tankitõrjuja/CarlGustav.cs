@@ -107,7 +107,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             }
         }
 
-        NPC FindClosestNPCToMouse(float maxDist = 55f)
+        NPC FindClosestNPCToMouse(float maxDist = 67f)
         {
             NPC closest = null;
             float closestDist = maxDist;

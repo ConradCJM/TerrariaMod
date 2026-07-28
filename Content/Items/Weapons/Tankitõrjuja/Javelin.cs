@@ -66,9 +66,9 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
         public override void SetDefaults()
         {
-            Projectile.width = 302;
-            Projectile.height = 128;
-            Projectile.scale = 0.30f;
+            Projectile.width = 616;
+            Projectile.height = 180;
+            Projectile.scale = 0.25f;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
@@ -165,7 +165,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             Projectile.rotation = aim.ToRotation();
 
-            Vector2 offset = new(-107, -10);
+            Vector2 offset = new(-235, -15);
             Projectile.Center = player.MountedCenter + offset;
 
             Projectile.spriteDirection = aim.X < 0 ? -1 : 1;

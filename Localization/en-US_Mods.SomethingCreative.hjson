@@ -230,7 +230,7 @@ Items: {
 
 	CarlGustav: {
 		DisplayName: Carl Gustav
-		Tooltip: 
+		Tooltip:
 			'''
 			Max Ammo: 10
 			Reload Time: 2s
