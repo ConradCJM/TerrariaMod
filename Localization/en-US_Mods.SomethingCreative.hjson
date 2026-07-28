@@ -237,6 +237,11 @@ Items: {
 		DisplayName: Igla
 		Tooltip: ""
 	}
+
+	Javelin: {
+		DisplayName: Javelin
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -281,6 +286,10 @@ Projectiles: {
 	ExhaustFlame.DisplayName: Exhaust Flame
 	CarlGustavProj.DisplayName: Carl Gustav Proj
 	IglaProj.DisplayName: Igla Proj
+	IglaExplosion.DisplayName: Igla Explosion
+	JavelinExplosion.DisplayName: Javelin Explosion
+	JavelinHeldProj.DisplayName: Javelin Held Proj
+	JavelinProj.DisplayName: Javelin Proj
 }
 
 DamageClasses.TankitõrjujaDamage.DisplayName: Tankitõrjuja Damage

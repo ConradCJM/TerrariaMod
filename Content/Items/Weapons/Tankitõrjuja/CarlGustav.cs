@@ -68,9 +68,9 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         bool readyToFire = false;
         public override void SetDefaults()
         {
-            Projectile.width = 302;
-            Projectile.height = 128;
-            Projectile.scale = 0.30f;
+            Projectile.width = 670;
+            Projectile.height = 207;
+            Projectile.scale = 0.25f;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
@@ -80,6 +80,56 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             Projectile.timeLeft = 2;
         }
+        void DrawLaser(Vector2 start, Vector2 end)
+        {
+            Vector2 direction = end - start;
+            float length = direction.Length();
+            direction.Normalize();
+
+            // spacing between dust particles
+            float step = 4f;
+
+            for (float i = 0; i < length; i += step)
+            {
+                Vector2 pos = start + direction * i;
+
+                Dust d = Dust.NewDustPerfect(
+                    pos,
+                    DustID.GemRuby,
+                    Vector2.Zero,
+                    0,
+                    Color.Red,
+                    1.2f
+                );
+
+                d.noGravity = true;
+                d.fadeIn = 0.4f;
+            }
+        }
+
+        NPC FindClosestNPCToMouse(float maxDist = 55f)
+        {
+            NPC closest = null;
+            float closestDist = maxDist;
+
+            Vector2 mouseWorld = Main.MouseWorld;
+
+            foreach (NPC npc in Main.npc)
+            {
+                if (!npc.active || npc.friendly || npc.life <= 0)
+                    continue;
+
+                float dist = Vector2.Distance(mouseWorld, npc.Center);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closest = npc;
+                }
+            }
+
+            return closest;
+        }
+
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles,
     List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers,
@@ -93,9 +143,8 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
         public override void AI()
         {
-            //more comments than usual since its my first time doing something like this
-            //Main.NewText("Current Charge: " + chargeTimer);
-
+            Projectile.ai[0]++;
+            
             Player player = Main.player[Projectile.owner];
 
             //force the player to stay on the Carl Gustav item slot
@@ -109,12 +158,23 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             //keep projectile alive
             Projectile.timeLeft = 2;
 
-            Vector2 aim = player.DirectionTo(Main.MouseWorld);
+            NPC target = FindClosestNPCToMouse();
+
+            Vector2 aim;
+            if (target != null)
+            {
+                aim = player.DirectionTo(target.Center);
+                if (Projectile.ai[0] % 12 == 0)
+                    DrawLaser(player.Center, target.Center);
+            }
+            else
+                aim = player.DirectionTo(Main.MouseWorld);
+
             Projectile.rotation = aim.ToRotation();
 
 
             //draw projectile
-            Vector2 offset = new (-107, -10);
+            Vector2 offset = new (-252, -15);
 
             Projectile.Center = player.MountedCenter + offset;
 
@@ -191,8 +251,15 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             }
 
             //fire projectile
-            Vector2 velocity = player.DirectionTo(Main.MouseWorld) * 10f;
-            
+            NPC target = FindClosestNPCToMouse();
+
+            Vector2 velocity;
+            if (target != null)
+                velocity = player.DirectionTo(target.Center) * 10f;
+            else
+                velocity = player.DirectionTo(Main.MouseWorld) * 10f;
+
+
 
             Projectile.NewProjectile(
                 Projectile.GetSource_FromThis(),

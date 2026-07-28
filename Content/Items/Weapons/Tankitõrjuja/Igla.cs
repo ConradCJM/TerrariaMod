@@ -16,7 +16,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         public override void SetDefaults()
         {
             Item.DamageType = ModContent.GetInstance<Classes.TankitõrjujaDamage>();
-            Item.damage = 367;
+            Item.damage = 400;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.channel = true;
@@ -35,13 +35,13 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             if (p.isReloading)
             {
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocking {p.reloadTimer / 60} seconds left");
+                CombatText.NewText(player.Hitbox, Color.Olive, $"Restocking {p.reloadTimer / 60} seconds left");
                 return false;
             }
 
             if (p.loadingTimer > 0)
             {
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Loading {p.loadingTimer / 60} seconds left");
+                CombatText.NewText(player.Hitbox, Color.Olive, $"Loading {p.loadingTimer / 60} seconds left");
                 return false;
             }
 
@@ -51,8 +51,9 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddRecipeGroup("IronBar", 40);
-            recipe.AddIngredient(ItemID.Wood, 15);
+            recipe.AddIngredient(ItemID.IllegalGunParts);
+            recipe.AddRecipeGroup("IronBar", 100);
+            recipe.AddCondition(Condition.DownedEowOrBoc);
             recipe.AddTile(TileID.Anvils);
             recipe.Register();
         }
@@ -65,9 +66,9 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
         public override void SetDefaults()
         {
-            Projectile.width = 302;
-            Projectile.height = 128;
-            Projectile.scale = 0.30f;
+            Projectile.width = 400;
+            Projectile.height = 55;
+            Projectile.scale = 0.55f;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
@@ -81,6 +82,33 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         {
             overPlayers.Add(index);
         }
+        void DrawLaser(Vector2 start, Vector2 end)
+        {
+            Vector2 direction = end - start;
+            float length = direction.Length();
+            direction.Normalize();
+
+            // spacing between dust particles
+            float step = 4f;
+
+            for (float i = 0; i < length; i += step)
+            {
+                Vector2 pos = start + direction * i;
+
+                Dust d = Dust.NewDustPerfect(
+                    pos,
+                    DustID.GemRuby,
+                    Vector2.Zero,
+                    0,
+                    Color.Red,
+                    1.2f
+                );
+
+                d.noGravity = true;
+                d.fadeIn = 0.4f;
+            }
+        }
+
         NPC FindStrongestNPCAbove(Player player)
         {
             NPC strongest = null;
@@ -112,6 +140,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
         public override void AI()
         {
+            Projectile.ai[0]++;
             Player player = Main.player[Projectile.owner];
 
             // Lock item slot
@@ -127,13 +156,18 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
             Vector2 aim;
             if (targetNPC != null)
+            {
                 aim = player.DirectionTo(targetNPC.Center);
+
+                if (Projectile.ai[0]%12 == 0)
+                    DrawLaser(player.Center, targetNPC.Center);
+            }
             else
                 aim = new Vector2(0, -1); // aim straight up if no target
 
             Projectile.rotation = aim.ToRotation();
 
-            Vector2 offset = new(-107, -10);
+            Vector2 offset = new(-90, -10);
             Projectile.Center = player.MountedCenter + offset;
 
             Projectile.spriteDirection = aim.X < 0 ? -1 : 1;
@@ -149,22 +183,22 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             if (holdingM1)
             {
                 if (chargeTimer == 0)
-                    CombatText.NewText(player.Hitbox, Color.LightYellow, "Preparing to Fire!");
+                    CombatText.NewText(player.Hitbox, Color.Olive, "Preparing to Fire!");
 
                 chargeTimer++;
 
-                if (chargeTimer >= 60)
+                if (chargeTimer >= 90)
                 {
                     if (!readyToFire)
-                        CombatText.NewText(player.Hitbox, Color.LightYellow, "Ready to Fire!");
+                        CombatText.NewText(player.Hitbox, Color.Olive, "Ready to Fire!");
 
                     readyToFire = true;
                 }
-                else if (chargeTimer < 60 && chargeTimer % 6 == 0)
+                else if (chargeTimer < 90 && chargeTimer % 6 == 0)
                 {
                     SoundEngine.PlaySound(SoundID.DrumClosedHiHat with
                     {
-                        Pitch = -1.2f + (chargeTimer / 60f) * 0.6f,
+                        Pitch = -1.2f + (chargeTimer / 90f) * 0.6f,
                         Volume = 0.2f
                     }, player.Center);
                 }
@@ -199,11 +233,11 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             {
                 p.isReloading = true;
                 p.reloadTimer = 60*15; //15 seconds
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocking! Ammo: {p.ammoCount}");
+                CombatText.NewText(player.Hitbox, Color.Olive, $"Restocking! Ammo: {p.ammoCount}");
             }
             else
             {
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Loading Ammo! Ammo: {p.ammoCount}");
+                CombatText.NewText(player.Hitbox, Color.Olive, $"Loading Ammo! Ammo: {p.ammoCount}");
             }
             NPC targetNPC = FindStrongestNPCAbove(player);
 
@@ -246,7 +280,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
             Projectile.height = 26;
             Projectile.scale = 0.25f;
             Projectile.friendly = true;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
@@ -317,10 +351,61 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                 Main.rand.NextFloat(0.5f, 2f)
             );
         }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        public override void OnKill(int timeleft)
         {
-            //summon custom explosion
+            Projectile.NewProjectile(
+                Projectile.GetSource_FromThis(),
+                Projectile.Center,
+                Vector2.Zero,
+                ModContent.ProjectileType<IglaExplosion>(),
+                damageLeft,
+                0f,
+                Projectile.owner
+            );
+        }
+    }
+    public class IglaExplosion : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 128;
+            Projectile.height = 128;
+            Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+            Projectile.ignoreWater = true;
+            Projectile.timeLeft = 2;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
+            Projectile.alpha = 255;
+        }
+
+        public override void AI()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+
+                var d=Dust.NewDustPerfect(
+                Projectile.Center,
+                DustID.GemAmber,
+                Main.rand.NextVector2Circular(12f, 12f),
+                150,
+                default,
+                Main.rand.NextFloat(0.5f, 6f)
+            );
+                var d2 = Dust.NewDustPerfect(
+                    Projectile.Center,
+                    DustID.Flare,
+                    Main.rand.NextVector2Circular(12f, 12f),
+                    150,
+                    default,
+                    Main.rand.NextFloat(0.5f, 6f)
+                );
+                d.noGravity = true;
+                d2.noGravity = true;
+            }
+
+            
         }
     }
 
@@ -339,7 +424,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                 loadingTimer--;
 
             if (loadingTimer == 0)
-                CombatText.NewText(player.Hitbox, Color.LightYellow, $"Ammo Loaded! Ammo: {ammoCount}");
+                CombatText.NewText(player.Hitbox, Color.Olive, $"Ammo Loaded! Ammo: {ammoCount}");
 
             if (isReloading)
             {
@@ -350,7 +435,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                     isReloading = false;
                     ammoCount = 4;
 
-                    CombatText.NewText(player.Hitbox, Color.LightYellow, $"Restocked! Now Loading! Ammo: {ammoCount}");
+                    CombatText.NewText(player.Hitbox, Color.Olive, $"Restocked! Now Loading! Ammo: {ammoCount}");
                 }
             }
         }
