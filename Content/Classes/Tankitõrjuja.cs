@@ -13,11 +13,11 @@ namespace SomethingCreative.Content.Classes
                 return StatInheritanceData.Full;
 
             return new StatInheritanceData(
-                damageInheritance: 0.1f,
-                critChanceInheritance: 0.1f,
-                attackSpeedInheritance: 0.1f,
-                armorPenInheritance: 0.1f,
-                knockbackInheritance: 0.1f);
+                damageInheritance: 0.2f,
+                critChanceInheritance: 0.2f,
+                attackSpeedInheritance: 0.2f,
+                armorPenInheritance: 0.2f,
+                knockbackInheritance: 0.2f);
         }
 
         public override bool GetEffectInheritance(DamageClass damageClass)
