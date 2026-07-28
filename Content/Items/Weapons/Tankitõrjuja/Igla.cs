@@ -370,6 +370,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
         {
             Projectile.width = 128;
             Projectile.height = 128;
+            Projectile.scale = 1.25f;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
