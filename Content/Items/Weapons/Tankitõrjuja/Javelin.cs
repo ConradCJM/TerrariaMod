@@ -185,18 +185,18 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
 
                 chargeTimer++;
 
-                if (chargeTimer >= 90)
+                if (chargeTimer >= 120 )
                 {
                     if (!readyToFire)
                         CombatText.NewText(player.Hitbox, Color.CornflowerBlue, "Ready to Fire!");
 
                     readyToFire = true;
                 }
-                else if (chargeTimer < 90 && chargeTimer % 6 == 0)
+                else if (chargeTimer < 120 && chargeTimer % 6 == 0)
                 {
                     SoundEngine.PlaySound(SoundID.DrumClosedHiHat with
                     {
-                        Pitch = -1.2f + (chargeTimer / 90f) * 0.6f,
+                        Pitch = -1.2f + (chargeTimer / 120f) * 0.6f,
                         Volume = 0.2f
                     }, player.Center);
                 }

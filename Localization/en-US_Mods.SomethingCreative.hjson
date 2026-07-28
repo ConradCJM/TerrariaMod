@@ -230,17 +230,42 @@ Items: {
 
 	CarlGustav: {
 		DisplayName: Carl Gustav
-		Tooltip: ""
+		Tooltip: 
+			'''
+			Max Ammo: 10
+			Reload Time: 2s
+			Restock Time: 10s
+			Aim Time: 1s
+
+			Does large damage and locks onto targets near cursor.
+			'''
 	}
 
 	Igla: {
 		DisplayName: Igla
-		Tooltip: ""
+		Tooltip:
+			'''
+			Max Ammo: 4
+			Reload Time: 4s
+			Restock Time: 15s
+			Aim Time: 1.5s
+
+			Does large damage and locks onto the strongest enemy near the player.
+			If no enemies are above the player, it will aim straight up.
+			'''
 	}
 
 	Javelin: {
 		DisplayName: Javelin
-		Tooltip: ""
+		Tooltip:
+			'''
+			Max Ammo: 6
+			Reload Time: 4s
+			Restock Time: 12s
+			Aim Time: 2s
+
+			Does large damage and locks onto the strongest enemy near your cursor.
+			'''
 	}
 }
 
