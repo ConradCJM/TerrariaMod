@@ -260,7 +260,7 @@ namespace SomethingCreative.Content.Items.Weapons.Tankitõrjuja
                 player.Center,
                 -velocity,
                 ModContent.ProjectileType<ExhaustFlame>(),
-                (int)(player.GetWeaponDamage(player.HeldItem) * 0.4f),
+                (int)(player.GetWeaponDamage(player.HeldItem) * 0.8f),
                 0f,
                 player.whoAmI
             );
