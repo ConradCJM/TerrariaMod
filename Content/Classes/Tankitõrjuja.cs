@@ -27,7 +27,7 @@ namespace SomethingCreative.Content.Classes
 
         public override void SetDefaultStats(Player player)
         {
-            player.GetArmorPenetration<TankitõrjujaDamage>() += 9999;
+            player.GetArmorPenetration<TankitõrjujaDamage>() += 999;
         }
 
         public override bool UseStandardCritCalcs => true;

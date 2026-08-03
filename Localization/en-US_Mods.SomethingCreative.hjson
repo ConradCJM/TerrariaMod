@@ -315,6 +315,10 @@ Projectiles: {
 	JavelinExplosion.DisplayName: Javelin Explosion
 	JavelinHeldProj.DisplayName: Javelin Held Proj
 	JavelinProj.DisplayName: Javelin Proj
+	BossBullet1.DisplayName: Boss Bullet1
+	BossBullet2.DisplayName: Boss Bullet2
+	WarningLine.DisplayName: Warning Line
 }
 
 DamageClasses.TankitõrjujaDamage.DisplayName: Tankitõrjuja Damage
+NPCs.AntiLegoAFKBoss.DisplayName: Mambo
