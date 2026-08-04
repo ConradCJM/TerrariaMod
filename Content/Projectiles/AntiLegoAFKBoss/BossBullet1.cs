@@ -19,7 +19,7 @@ namespace SomethingCreative.Content.Projectiles.AntiLegoAFKBoss
         {
             Projectile.width = 82;
             Projectile.height = 82;
-            Projectile.scale = 0.5f;
+            Projectile.scale = 0.35f;
             Projectile.friendly = false;
             Projectile.hostile = true;
             Projectile.tileCollide = false;
@@ -28,11 +28,11 @@ namespace SomethingCreative.Content.Projectiles.AntiLegoAFKBoss
         }
         public override void AI()
         {
-            if (Projectile.ai[0] % 45 == 0 && Projectile.ai[0] > 1) {
+            if (Projectile.ai[0] % 35 == 0 && Projectile.ai[0] > 1) {
                 isDecelerating = !isDecelerating;
             }
 
-            Projectile.scale = 0.65f;
+            Projectile.scale = 0.55f;
             Projectile.ai[0]++;
             if (Projectile.ai[0] == 1) {
                 velocity = Projectile.velocity;

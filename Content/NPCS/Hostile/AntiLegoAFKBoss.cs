@@ -1,13 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Humanizer;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SomethingCreative.Content.Projectiles.AntiLegoAFKBoss;
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.UI.BigProgressBar;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent;
-using SomethingCreative.Content.Projectiles.AntiLegoAFKBoss;
 
 
 namespace SomethingCreative.Content.NPCS.Hostile
@@ -55,7 +56,7 @@ namespace SomethingCreative.Content.NPCS.Hostile
         {
             NPC.width = 600;
             NPC.height = 600;
-            NPC.damage = 1000;
+            NPC.damage = 0;
             NPC.defense = 1000;
             NPC.lifeMax = 670000;
             NPC.knockBackResist = 0f;
@@ -98,16 +99,8 @@ namespace SomethingCreative.Content.NPCS.Hostile
             switch ((int)NPC.ai[StateSlot])
             {
                 case 0:
-                    if (NPC.ai[PhaseSlot] == 0)
-                    {
-                        //HoverAroundPlayer(player);
-                        CirclePlayer(player, 700f, 0.01f);
-                    }
-                    
-                    if (NPC.ai[StateTimerSlot] > 300) // after 5 seconds
-                        ChangeState(Main.rand.Next(1,5));
+                    WaveAttack();
                     break;
-
                 case 1:
                     HoverAroundPlayerProj(player, 0, -400);
                     break;
@@ -116,10 +109,10 @@ namespace SomethingCreative.Content.NPCS.Hostile
                     break;
 
                 case 3:
-                    SpiralBurst(2);
+                    SpiralBurst(3,10f);
                     break;
                 case 4:
-                    GridBurst(player);
+                    GridBurst(player, 8);
                     break;
 
             }
@@ -163,19 +156,49 @@ namespace SomethingCreative.Content.NPCS.Hostile
 
         }
 
-        private void CirclePlayer(Player player, float radius = 300f, float rotationSpeed = 0.03f)
+        //ai generated cause when i tried it myself for over an hour i lowkey started crashing out
+        private void WaveAttack(int count = 2, int damage = 200)
         {
+            if (NPC.ai[StateTimerSlot] % 17 != 0) return;
+            NPC.velocity = new Vector2(0, -0.3f);
 
-            NPC.ai[2] += rotationSpeed; // use SubStateSlot as angle
-
-            Vector2 circlePos = player.Center +
-                new Vector2((float)Math.Cos(NPC.ai[2]), (float)Math.Sin(NPC.ai[2])) * radius;
-
-            Vector2 move = circlePos - NPC.Center;
             float speed = 12f;
+            Vector2 bossPos = NPC.Center;
+            int projType = ModContent.ProjectileType<BossBullet1>();
 
-            NPC.velocity = move.SafeNormalize(Vector2.Zero) * speed;
+            // Progress of attack (0 → 1)
+            float t = NPC.ai[StateTimerSlot] / 300f;
+            t = MathHelper.Clamp(t, 0f, 1f);
+
+            // Offsets shrink over time
+            float horizontalOffset = MathHelper.Lerp(2000f, 0f, t);
+            float verticalRange = MathHelper.Lerp(1300f, 0f, t);
+
+            // LEFT WAVES
+            for (int j = 0; j < count; j++)
+            {
+                float y = MathHelper.Lerp(bossPos.Y - verticalRange, bossPos.Y + verticalRange, j / (float)(count - 1));
+                Vector2 spawnPos = new Vector2(bossPos.X - horizontalOffset, y);
+
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0f, speed), projType, damage, 0f, Main.myPlayer);
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0f, -speed), projType, damage, 0f, Main.myPlayer);
+            }
+
+            // RIGHT WAVES
+            for (int j = 0; j < count; j++)
+            {
+                float y = MathHelper.Lerp(bossPos.Y - verticalRange, bossPos.Y + verticalRange, j / (float)(count - 1));
+                Vector2 spawnPos = new Vector2(bossPos.X + horizontalOffset, y);
+
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0f, speed), projType, damage, 0f, Main.myPlayer);
+                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, new Vector2(0f, -speed), projType, damage, 0f, Main.myPlayer);
+            }
+
+            if (NPC.ai[StateTimerSlot] > 300)
+                ChangeState(Main.rand.Next(5));
         }
+
+
 
         private void ProjectileSpew(int damage = 200)
         {
@@ -220,15 +243,20 @@ namespace SomethingCreative.Content.NPCS.Hostile
         }
 
 
-        private void SpiralBurst(int ProjectileCount = 1,float baseSpeed = 12f, int damage = 200)
+        private void SpiralBurst(int ProjectileCount = 1, float baseSpeed = 12f, int damage = 200)
         {
             NPC.velocity = new Vector2(0, -0.8f);
             NPC.ai[SubStateSlot] += 0.15f; // rotation speed
 
-
             for (int i = 0; i < ProjectileCount; i++)
             {
-                float angle = NPC.ai[SubStateSlot] + MathHelper.ToRadians(360f / ProjectileCount * i);
+                //1 degree random offset
+                float randomOffset = MathHelper.ToRadians(Main.rand.NextFloat(-1f, 1f));
+
+                float angle = NPC.ai[SubStateSlot]
+                              + MathHelper.ToRadians(360f / ProjectileCount * i)
+                              + randomOffset;
+
                 Vector2 velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * baseSpeed;
 
                 Projectile.NewProjectile(
@@ -242,131 +270,80 @@ namespace SomethingCreative.Content.NPCS.Hostile
                 );
             }
 
-            if (NPC.ai[StateTimerSlot] > 180)
+            if (NPC.ai[StateTimerSlot] > 300)
                 ChangeState(Main.rand.Next(5));
         }
-        private void GridBurst(Player player, int damage = 200)
+
+        private void GridBurst(Player player,int count = 12, int damage = 200)
         {
-            // PHASE 1 — WARNING LINES (first 60 ticks)
-            if (NPC.ai[StateTimerSlot] == 1)
-            {
-                SpawnGridWarnings(player,1);
-            }
+            int projType = ModContent.ProjectileType<BossBullet1>();
+            float speed = 14f;
 
-            // PHASE 2 — REAL BULLETS (after 60 ticks)
-            if (NPC.ai[StateTimerSlot] > 60 &&
-                NPC.ai[StateTimerSlot] % 60 == 0)
+            for (int i = 0; i < Main.maxPlayers; i++)
             {
-                SpawnGridBullets(player, damage,1);
-            }
+                Player p = Main.player[i];
 
+                if (!p.active || p.dead)
+                    continue;
+
+                float left = p.Center.X - 800f;
+                float right = p.Center.X + 800f;
+                float top = p.Center.Y - 800f;
+                float bottom = p.Center.Y + 800f;
+
+                if (NPC.ai[StateTimerSlot] % 35 == 0)
+                {
+
+
+
+                    // top → bottom warning
+                    for (int j = 0; j < count; j++)
+                    {
+                        float x = MathHelper.Lerp(left, right, j/ (float)(count - 1));
+                        Vector2 spawnPos = new Vector2(x, top);
+                        Vector2 velocity = new Vector2(0f, speed);
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
+                    }
+
+                    // bottom → top warning
+                    for (int j = 0; j < count; j++)
+                    {
+                        float x = MathHelper.Lerp(left, right, j / (float)(count - 1));
+                        Vector2 spawnPos = new Vector2(x, bottom);
+                        Vector2 velocity = new Vector2(0f, -speed);
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
+                    }
+
+                    // left → right warning
+                    for (int j = 0; j < count; j++)
+                    {
+                        float y = MathHelper.Lerp(top, bottom, j / (float)(count - 1));
+                        Vector2 spawnPos = new Vector2(left, y);
+                        Vector2 velocity = new Vector2(speed, 0f);
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
+                    }
+
+                    // right → left warning
+                    for (int j = 0; j < count; j++)
+                    {
+                        float y = MathHelper.Lerp(top, bottom, j / (float)(count - 1));
+                        Vector2 spawnPos = new Vector2(right, y);
+                        Vector2 velocity = new Vector2(-speed, 0f);
+
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
+                    }
+
+                }
+            }
             // End attack after 4 seconds
             if (NPC.ai[StateTimerSlot] > 240)
                 ChangeState(Main.rand.Next(5));
         }
-        private void SpawnGridWarnings(Player player, int count = 12)
-        {
-            int projType = ModContent.ProjectileType<BossBullet1>();
-            float speed = 10f;
-
-            float left = player.Center.X - 800f;
-            float right = player.Center.X + 800f;
-            float top = player.Center.Y - 800f;
-            float bottom = player.Center.Y + 800f;
-
-
-            // top → bottom warning
-            for (int i = 0; i < count; i++)
-            {
-                float x = MathHelper.Lerp(left, right, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(x, top);
-                Vector2 velocity = new Vector2(0f, speed);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-
-            // bottom → top warning
-            for (int i = 0; i < count; i++)
-            {
-                float x = MathHelper.Lerp(left, right, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(x, bottom);
-                Vector2 velocity = new Vector2(0f, -speed);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-
-            // left → right warning
-            for (int i = 0; i < count; i++)
-            {
-                float y = MathHelper.Lerp(top, bottom, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(left, y);
-                Vector2 velocity = new Vector2(speed, 0f);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-
-            // right → left warning
-            for (int i = 0; i < count; i++)
-            {
-                float y = MathHelper.Lerp(top, bottom, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(right, y);
-                Vector2 velocity = new Vector2(-speed, 0f);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-        }
-        private void SpawnGridBullets(Player player, int damage, int count = 12)
-        {
-            int projType = ModContent.ProjectileType<BossBullet1>();
-            float speed = 10f;
-
-            float left = player.Center.X - 800f;
-            float right = player.Center.X + 800f;
-            float top = player.Center.Y - 800f;
-            float bottom = player.Center.Y + 800f;
-
-
-
-            // top → bottom warning
-            for (int i = 0; i < count; i++)
-            {
-                float x = MathHelper.Lerp(left, right, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(x, top);
-                Vector2 velocity = new Vector2(0f, speed);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-
-            // bottom → top warning
-            for (int i = 0; i < count; i++)
-            {
-                float x = MathHelper.Lerp(left, right, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(x, bottom);
-                Vector2 velocity = new Vector2(0f, -speed);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-
-            // left → right warning
-            for (int i = 0; i < count; i++)
-            {
-                float y = MathHelper.Lerp(top, bottom, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(left, y);
-                Vector2 velocity = new Vector2(speed, 0f);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-
-            // right → left warning
-            for (int i = 0; i < count; i++)
-            {
-                float y = MathHelper.Lerp(top, bottom, i / (float)(count - 1));
-                Vector2 spawnPos = new Vector2(right, y);
-                Vector2 velocity = new Vector2(-speed, 0f);
-
-                Projectile.NewProjectile(NPC.GetSource_FromAI(), spawnPos, velocity, projType, 0, 0f);
-            }
-        }
+        
+        
 
 
 
